@@ -1,0 +1,30 @@
+/*? Tailwind css configuration */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*? Custom font configuration */
+@font-face {
+  font-family: 'acuminPro';
+  src: url('./assets/fonts/made_carving_soft/MADECarvingSoftPERSONALUSE-Medium.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+.customFont{
+  font-family: 'acuminPro';
+}
+
+/** Test Borders */
+/* .testBorder{
+  border: 2px solid white;
+}
+.testBorder2{
+  border:2px solid red;
+}
+.testBorder3{
+  border:2px solid green;
+} */
+
+.tabColor{
+  color: white;
+}
