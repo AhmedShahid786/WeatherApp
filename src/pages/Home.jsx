@@ -4,8 +4,7 @@ import { useState } from "react";
 //? Local components imports
 import Header from "../sections/Header";
 import MenuSec from "../sections/Menu"
-import Weather from "../sections/Weather";
-import WeatherTabs from "../sections/WeatherTabs";
+import Weather from "../sections/subSections/WeatherToday";
 
 const Home = () => {
 
@@ -23,7 +22,7 @@ const Home = () => {
         </div>
 
         <div className="w-full pl-6">
-          <WeatherTabs/>
+          <Weather/>
         </div>
 
       </div>

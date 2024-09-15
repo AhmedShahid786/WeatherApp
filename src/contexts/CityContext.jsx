@@ -17,7 +17,7 @@ export const CityContextProvider = ({children}) => {
           const iconUrl = `https://openweathermap.org/img/wn/${res.weather[0].icon}@2x.png`;
           setImg(iconUrl)
           setTemp(Math.round(res.main.temp - 273.15));
-          setDesc(res.weather[0].description.toLowerCase())
+          setDesc(res.weather[0].description)
         })
       )
     }, [city])
