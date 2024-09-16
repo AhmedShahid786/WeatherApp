@@ -3,7 +3,6 @@ import { WeatherContext } from "../contexts/WeatherContext";
 
 export const WeatherData = () => {
   const { city, desc, temp } = useContext(WeatherContext);
-
   return (
     <div className="w-2/4">
       <div className="testBorder3 w-full py-8 flex flex-col items-start justify-start">
@@ -15,7 +14,7 @@ export const WeatherData = () => {
         </p>
       </div>
       <div className="w-full flex justify-start items-center">
-        <p className="text-9xl">{temp}</p>
+        <p className="text-9xl">{Math.round(temp - 273.15)}</p>
         <span className="text-5xl mb-auto">{"\u00B0"}</span>
       </div>
     </div>

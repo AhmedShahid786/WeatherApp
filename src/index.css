@@ -15,7 +15,7 @@
 }
 
 /** Test Borders */
-.testBorder{
+/* .testBorder{
   border: 2px solid white;
 }
 .testBorder2{
@@ -23,7 +23,7 @@
 }
 .testBorder3{
   border:2px solid green;
-}
+} */
 
 .tabColor{
   color: white;
