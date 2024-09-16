@@ -1,20 +1,20 @@
-import { CityContextProvider } from "./contexts/CityContext";
-import ThemeContextProvider from "./contexts/ThemeContext"
-import Home from "./pages/Home"
-import "./index.css"
+import { WeatherContextProvider } from "./contexts/WeatherContext";
+import ThemeContextProvider from "./contexts/ThemeContext";
+import Home from "./pages/Home";
+import "./index.css";
 
 function App() {
   return (
     <>
-      <CityContextProvider>
+      <WeatherContextProvider>
         <ThemeContextProvider>
           <section>
             <Home />
           </section>
         </ThemeContextProvider>
-      </CityContextProvider>
+      </WeatherContextProvider>
     </>
   );
 }
 
-export default App
+export default App;
