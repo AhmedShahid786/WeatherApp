@@ -2,13 +2,11 @@
 import axios from "axios";
 import { createContext, useState, useEffect } from "react";
 
-
-
-
 const WeatherContext = createContext();
-const apiKey = "f258d4a7f76f264d7ac94454d85a6dc2";
 
 const WeatherContextProvider = ({ children }) => {
+  const apiKey = "f258d4a7f76f264d7ac94454d85a6dc2";
+
   const [lat, setLat] = useState("")
   const [lon, setLon] = useState("")
   const [city, setCity] = useState("")
@@ -33,18 +31,18 @@ useEffect(() => {
          (error) => console.error("Geolocation error:", error.message)
        );
      } else {
-       console.log("Geolocation is not supported by this browser.");
+       console.log("Geolocation is not supported by this browser, city set as Karachi");
+       setCity("karachi")
      }
    };
-
    fetchWeatherData();
  }, []);
 
-  // useEffect(() => {
-  //   axios.get(
-  //     `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=f258d4a7f76f264d7ac94454d85a6dc2`
-  //   );
-  // }, []);
+  useEffect(() => {
+    axios.get(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=f258d4a7f76f264d7ac94454d85a6dc2`
+    );
+  }, []);
 
   return (
     <WeatherContext.Provider value={{ city, setCity, img, temp, desc }}>
