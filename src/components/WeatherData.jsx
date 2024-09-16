@@ -2,7 +2,8 @@ import { useContext } from "react";
 import { WeatherContext } from "../contexts/WeatherContext";
 
 export const WeatherData = () => {
-  const { city, desc, temp } = useContext(WeatherContext);
+  const { currentWeather, city } = useContext(WeatherContext);
+  const {desc, temp} = currentWeather
   return (
     <div className="w-2/4">
       <div className="testBorder3 w-full py-8 flex flex-col items-start justify-start">

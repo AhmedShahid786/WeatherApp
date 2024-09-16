@@ -12,10 +12,6 @@ const WeatherContextProvider = ({ children }) => {
   const [lat, setLat] = useState("")
   const [lon, setLon] = useState("")
   const [city, setCity] = useState("karachi")
-  const [humidity, setHumidity] = useState("")
-  const [desc, setDesc] = useState("");
-  const [ temp, setTemp ] = useState()
-  const [ img, setImg ] = useState("")
 
 //? Get current city to display data by default and also get
 //? longitude and latitude for one call api 
@@ -54,17 +50,18 @@ const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=f25
         temp: res.data.main.temp,
         img: res.data.weather[0].icon,
         humidity: res.data.main.humidity,
+        feelsLike: res.data.main.feels_like,
+        pressure: res.data.main.pressure,
+        wind: res.data.wind.speed,
+        sunrise: res.data.sys.sunrise,
+        sunset: res.data.sys.sunset
       });
-      setHumidity(res.data.main.humidity)
-      setDesc(res.data.weather[0].description)
-      setImg(res.data.weather[0].icon);
-      setTemp(res.data.main.temp)
       
-  })
+  }).catch((err)=>console.log("error in fetching current weather", err))
   }, []);
 
   return (
-    <WeatherContext.Provider value={{ city, setCity, img, temp, desc,humidity }}>
+    <WeatherContext.Provider value={{currentWeather,city}}>
       {children}
     </WeatherContext.Provider>
   );
