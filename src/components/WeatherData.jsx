@@ -15,7 +15,7 @@ export const WeatherData = () => {
         </p>
       </div>
       <div className="w-full flex justify-start items-center">
-        <p className="text-9xl">{Math.round(temp - 273.15)}</p>
+        <p className="text-9xl">{temp ? Math.round(temp - 273.15) : ""}</p>
         <span className="text-5xl mb-auto">{"\u00B0"}</span>
       </div>
     </div>

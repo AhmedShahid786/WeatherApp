@@ -40,9 +40,9 @@ const WeatherContextProvider = ({ children }) => {
 //    fetchWeatherData();
 //  }, []);
 
-const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=f258d4a7f76f264d7ac94454d85a6dc2`;
+const urlCW = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=f258d4a7f76f264d7ac94454d85a6dc2`;
   useEffect(() => {
-    axios.get(url)
+    axios.get(urlCW)
     .then((res)=> {
       console.log(res)
       setCurrentWeather({
@@ -56,12 +56,11 @@ const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=f25
         sunrise: res.data.sys.sunrise,
         sunset: res.data.sys.sunset
       });
-      
   }).catch((err)=>console.log("error in fetching current weather", err))
-  }, []);
+  }, [city]);
 
   return (
-    <WeatherContext.Provider value={{currentWeather,city}}>
+    <WeatherContext.Provider value={{currentWeather, city, setCity}}>
       {children}
     </WeatherContext.Provider>
   );
