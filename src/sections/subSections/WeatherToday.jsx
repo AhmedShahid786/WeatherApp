@@ -17,22 +17,43 @@ const WeatherToday = () => {
     currentWeather.wind,
   ];
   return (
-    <section className="testBorder flex items-center justify-between">
-      <div className="testBorder2 w-2/4 flex text-sub customFont">
-        <WeatherData />
-        <div className="testBorder3 w-2/4 flex items-center justify-center">
-          <WeatherIcon />
+    <section className="testBorder flex flex-col items-center justify-center">
+      <div className="flex w-full">
+        <div className="testBorder2 w-2/4 flex text-sub customFont">
+          <WeatherData />
+          <div className="testBorder3 w-2/4 flex items-center justify-center">
+            <WeatherIcon />
+          </div>
+        </div>
+
+        <div className="testBorder3 w-2/4 h-full flex flex-wrap justify-around items-center">
+          {gifs.map((gif, ind) => {
+            console.log(AdditionalInfoVals[ind]);
+            return (
+              <AdditionalInfo
+                pic={gif.gif}
+                label={gif.label}
+                value={AdditionalInfoVals[ind]}
+              />
+            );
+          })}
         </div>
       </div>
 
-      <div className="testBorder3 w-2/4 h-full flex flex-wrap justify-around items-center">
-        {gifs.map((gif, ind)=>{
-          console.log(AdditionalInfoVals[ind]);
-          
-          return(
-          <AdditionalInfo pic={gif.gif} label={gif.label} value={AdditionalInfoVals[ind]}/>
-          )
-        })}
+      <div className="testBorder3 w-full">
+        <p className="text-sub text-xl opactiy-50">Hourly Forecast</p>
+
+        <div className="testBorder2 w-full">
+          <div className="testBorder w-36 h-40 flex flex-col justify-center items-center mt-2 mr-2 text-sub">
+            <p>6:00</p>
+            <img
+              src={`https://openweathermap.org/img/wn/${currentWeather.img}@2x.png`}
+              alt=""
+              className="w-20 h-20"
+            />
+            <p className="text-4xl">21</p>
+          </div>
+        </div>
       </div>
     </section>
   );
