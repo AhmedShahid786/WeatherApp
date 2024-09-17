@@ -48,7 +48,7 @@ fetchWeatherData()
  useEffect(() => {
     axios.get(url)
     .then((res)=> {
-      console.log(res);
+      // console.log(res);
       setCurrentWeather({
         desc: res.data.current.weather[0].description,
         temp: res.data.current.temp,
