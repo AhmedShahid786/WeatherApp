@@ -28,12 +28,12 @@ const WeatherToday = () => {
 
         <div className="testBorder3 w-2/4 h-full flex flex-wrap justify-around items-center">
           {gifs.map((gif, ind) => {
-            console.log(AdditionalInfoVals[ind]);
             return (
               <AdditionalInfo
                 pic={gif.gif}
                 label={gif.label}
                 value={AdditionalInfoVals[ind]}
+                key={ind}
               />
             );
           })}
