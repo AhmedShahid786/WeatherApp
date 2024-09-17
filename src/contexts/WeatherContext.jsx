@@ -69,7 +69,7 @@ fetchWeatherData()
 }, [city]);
 
   return (
-    <WeatherContext.Provider value={{currentWeather, city, setCity}}>
+    <WeatherContext.Provider value={{ city, setCity, currentWeather, hourlyWeather, tomorrowWeather, weekWeather}}>
       {children}
     </WeatherContext.Provider>
   );
