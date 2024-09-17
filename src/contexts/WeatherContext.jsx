@@ -8,7 +8,10 @@ const WeatherContextProvider = ({ children }) => {
   const apiKey = "f258d4a7f76f264d7ac94454d85a6dc2";
 
   const [ currentWeather, setCurrentWeather ] = useState({}) 
-  const [ hourlyWeather, setHourlyWeather ] = useState({})
+  const [ hourlyWeather, setHourlyWeather ] = useState([])
+  const [ tomorrowWeather, setTomorrowWeather ] = useState([])
+  const [ weekWeather, setWeekWeather ] = useState([])
+
 
   const [lat, setLat] = useState("")
   const [lon, setLon] = useState("")
@@ -57,6 +60,11 @@ fetchWeatherData()
         sunrise: res.data.current.sunrise,
         sunset: res.data.current.sunset,
       });
+
+      setHourlyWeather(res.data.hourly.slice(0, 23))
+      setTomorrowWeather(res.data.hourly.slice(24))
+      setWeekWeather(res.data.daily)
+
   }).catch((err)=>console.log("error in fetching current weather", err))
 }, [city]);
 
