@@ -9,8 +9,8 @@ export default {
       colors: {
         firstD: "#222831",
         secondD: "#393E46",
-        thirdD: "#00FFF5",
-        fourthD: "#FF2E63",
+        thirdD: "#FF2E63",
+        fourthD: "#00FFF5",
         firstL: "#00FFF5",
         secondL: "#00ADB5",
         thirdL: "#393E46",

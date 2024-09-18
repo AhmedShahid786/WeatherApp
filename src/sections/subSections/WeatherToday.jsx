@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { WeatherContext } from "../../contexts/WeatherContext";
 
-import gifs from "../../assets/gifs/gifs"
+import gifs from "../../assets/gifs/gifs";
 import { WeatherIcon } from "../../components/WeatherIcon";
 import { WeatherData } from "../../components/WeatherData";
 import { AdditionalInfo } from "../../components/AdditionalInfo";
@@ -9,10 +9,10 @@ import { themeContext } from "../../contexts/ThemeContext";
 import WeatherHourly from "../../components/WeatherHourly";
 
 const WeatherToday = () => {
-  const {theme} = useContext(themeContext)
-  const {currentWeather,hourlyWeather} = useContext(WeatherContext)
+  const { theme } = useContext(themeContext);
+  const { currentWeather, hourlyWeather } = useContext(WeatherContext);
   const AdditionalInfoVals = [
-    currentWeather.humidity, 
+    currentWeather.humidity,
     currentWeather.pressure,
     currentWeather.feelsLike,
     currentWeather.sunrise,
@@ -20,11 +20,11 @@ const WeatherToday = () => {
     currentWeather.wind,
   ];
   return (
-    <section className="testBorder flex flex-col items-center justify-center pr-4">
+    <section className="flex flex-col items-center justify-center pr-4 flex-wrap">
       <div className="flex w-full">
-        <div className={`testBorder2 w-2/4 flex text-sub customFont`}>
+        <div className={`2 w-2/4 flex text-sub customFont`}>
           <WeatherData />
-          <div className="testBorder3 w-2/4 flex items-center justify-center">
+          <div className="3 w-2/4 flex items-center justify-center">
             <WeatherIcon />
           </div>
         </div>
@@ -47,18 +47,16 @@ const WeatherToday = () => {
       </div>
 
       <div
-        className={`testBorder3 w-full border-2 px-4 rounded-lg mt-2
+        className={`w-full border-2 px-4 rounded-lg mt-2 flex-wrap
           ${theme === "dark" ? "border-thirdD" : "border-thirdL"}`}
       >
-        <p
-          className={`text-xl opactiy-50
+        <div className="w-full">
+          <p
+            className={`text-xl
           ${theme === "dark" ? "text-thirdD" : "text-thirdL"}`}
-        >
-          Hourly Forecast
-        </p>
-
-        <div className="testBorder2 w-full flex ">
-{/* {hourlyWeather.map((data, ind)=> <WeatherHourly key={ind} time={"6:00"} img={data.weather[0].icon} temp={data.temp}/>)} */}
+          >
+            Hourly Forecast
+          </p>
         </div>
       </div>
     </section>

@@ -62,12 +62,10 @@ fetchWeatherData()
           });
 
           setHourlyWeather(res.data.hourly.slice(0, 23));
-          console.log(hourlyWeather);
-
           setTomorrowWeather(res.data.hourly.slice(24));
           setWeekWeather(res.data.daily);
         })
-        .catch((err) => console.log("error in fetching current weather", err));
+        .catch((err) => console.log("error in fetching weather", err));
     }).catch((err)=>console.log("Error in getting coardinates for onecall api", err))
 }, [city]);
 

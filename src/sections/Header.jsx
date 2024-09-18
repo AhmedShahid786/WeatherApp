@@ -23,7 +23,11 @@ const Header = () => {
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         onPressEnter={() => handleSearch(inputValue)}
-        prefix={<SearchOutlined />}
+        prefix={
+          <SearchOutlined
+            className={`${theme === "dark" ? "text-thirdD" : "text-thirdL"}`}
+          />
+        }
         className={`w-4/5 bg-transparent hover:bg-transparent active:bg-transparent text-xl placeholder:text-sub py-2 border-2
           ${
             theme === "dark"
@@ -33,12 +37,18 @@ const Header = () => {
           `}
       />
 
-      <Switch
-        checkedChildren={<MoonOutlined className="text-xl" />}
-        unCheckedChildren={<SunOutlined className="text-xl" />}
-        defaultChecked
-        onChange={handleChange}
-        size="default"
+      <Avatar
+        size="large"
+        className={`cursor-pointer border-2 flex items-center justify-center
+          ${theme === "dark" ? "border-thirdD" : "border-thirdL"}`}
+        src={
+          theme === "dark" ? (
+            <SunOutlined className="text-fourthD w-4" />
+          ) : (
+            <MoonOutlined className="text-fourthL w-4" />
+          )
+        }
+        onClick={handleChange}
       />
 
       <Avatar

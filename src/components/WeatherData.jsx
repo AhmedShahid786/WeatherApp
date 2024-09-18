@@ -8,7 +8,7 @@ export const WeatherData = () => {
   const {desc, temp} = currentWeather
   return (
     <div className="w-2/4">
-      <div className="testBorder3 w-full py-8 flex flex-col items-start justify-start">
+      <div className="w-full py-8 flex flex-col items-start justify-start">
         <p
           className={`text-5xl mb-4
           ${theme === "dark" ? "text-fourthD" : "text-fourthL"}
