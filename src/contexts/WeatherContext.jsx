@@ -34,12 +34,13 @@ const fetchWeatherData = async () => {
           setCity(response.data.name);
         } catch (error) {
           console.error("Error in fetching city:", error);
+          setCity("Karachi");
         }
       }
     );
   } else {
     console.log("Geolocation is not supported by this browser, city set as Karachi")
-    setCity("karachi");
+    setCity("Karachi");
   }
 };
 fetchWeatherData()

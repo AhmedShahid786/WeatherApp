@@ -13,7 +13,7 @@ const Header = () => {
   const handleChange = () => setTheme(theme === "light" ? "dark" : "light");
 
   const [inputValue, setInputValue] = useState("");
-  const { city, setCity } = useContext(WeatherContext);
+  const { setCity } = useContext(WeatherContext);
   const handleSearch = (inputValue) => setCity(inputValue);
 
   return (
@@ -24,7 +24,13 @@ const Header = () => {
         onChange={(e) => setInputValue(e.target.value)}
         onPressEnter={() => handleSearch(inputValue)}
         prefix={<SearchOutlined />}
-        className={`w-4/5 bg-transparent hover:bg-transparent text-sub border-sub text-xl placeholder:text-sub py-2`}
+        className={`w-4/5 bg-transparent hover:bg-transparent active:bg-transparent text-xl placeholder:text-sub py-2 border-2
+          ${
+            theme === "dark"
+              ? "border-thirdD text-fourthD"
+              : "border-thirdL text-fourthL"
+          }
+          `}
       />
 
       <Switch
@@ -38,7 +44,7 @@ const Header = () => {
       <Avatar
         size="large"
         className={`${
-          theme === "dark" ? "border-sub" : "border-black"
+          theme === "dark" ? "border-thirdD" : "border-thirdL"
         } border-2`}
       />
     </section>
