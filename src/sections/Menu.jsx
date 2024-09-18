@@ -54,7 +54,7 @@ const items = [
 
 const App = () => {
 
-    const {theme, setTheme} = useContext(themeContext)
+    const {theme} = useContext(themeContext)
 
   //? AntD Component Code
   const [collapsed, setCollapsed] = useState(false);
@@ -62,7 +62,11 @@ const App = () => {
     setCollapsed(!collapsed);
   };
   return (
-    <div className="max-w-[256px] px-2 py-4 customFont">
+    <div
+      className={`max-w-[256px] px-2 py-4 customFont
+    ${theme === "light" ? "bg-firstL" : "bg-firstD"}
+    `}
+    >
       <Button
         type="primary"
         onClick={toggleCollapsed}
@@ -77,7 +81,8 @@ const App = () => {
         theme={theme}
         inlineCollapsed={collapsed}
         items={items}
-        className="text-lg customFont"
+        className={`text-lg customFont
+    ${theme === "light" ? "bg-firstL" : "bg-firstD"}`}
       />
     </div>
   );

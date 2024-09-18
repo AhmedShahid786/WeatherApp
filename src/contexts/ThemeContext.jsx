@@ -7,7 +7,6 @@ const defaultTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ?
 
 function ThemeContextProvider({children}){
     const [theme, setTheme] = useState(defaultTheme)
-
     return(
         <themeContext.Provider value={{theme, setTheme}}>
             {children}
