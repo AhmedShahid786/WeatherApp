@@ -6,10 +6,11 @@ import { WeatherIcon } from "../../components/WeatherIcon";
 import { WeatherData } from "../../components/WeatherData";
 import { AdditionalInfo } from "../../components/AdditionalInfo";
 import { themeContext } from "../../contexts/ThemeContext";
+import WeatherHourly from "../../components/WeatherHourly";
 
 const WeatherToday = () => {
   const {theme} = useContext(themeContext)
-  const {currentWeather} = useContext(WeatherContext)
+  const {currentWeather,hourlyWeather} = useContext(WeatherContext)
   const AdditionalInfoVals = [
     currentWeather.humidity, 
     currentWeather.pressure,
@@ -56,7 +57,9 @@ const WeatherToday = () => {
           Hourly Forecast
         </p>
 
-        <div className="testBorder2 w-full"></div>
+        <div className="testBorder2 w-full flex ">
+{/* {hourlyWeather.map((data, ind)=> <WeatherHourly key={ind} time={"6:00"} img={data.weather[0].icon} temp={data.temp}/>)} */}
+        </div>
       </div>
     </section>
   );

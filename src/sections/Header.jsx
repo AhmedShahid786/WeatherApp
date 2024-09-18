@@ -13,7 +13,7 @@ const Header = () => {
   const handleChange = () => setTheme(theme === "light" ? "dark" : "light");
 
   const [inputValue, setInputValue] = useState("");
-  const { setCity } = useContext(WeatherContext);
+  const { city,setCity } = useContext(WeatherContext);
   const handleSearch = (inputValue) => setCity(inputValue);
 
   return (
