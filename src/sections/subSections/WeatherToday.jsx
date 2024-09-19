@@ -47,7 +47,7 @@ const WeatherToday = () => {
       </div>
 
       <div
-        className={`w-full border-2 px-4 rounded-lg mt-2 flex-wrap
+        className={`w-full border-2 px-2 rounded-lg flex-wrap
           ${theme === "dark" ? "border-thirdD" : "border-thirdL"}`}
       >
         <div className="w-full">
@@ -57,8 +57,9 @@ const WeatherToday = () => {
           >
             Hourly Forecast
           </p>
-
-          <WeatherHourly hourlyWeatherData={hourlyWeather}/>
+        </div>
+        <div>
+          <WeatherHourly hourlyWeatherData={hourlyWeather} />
         </div>
       </div>
     </section>

@@ -53,25 +53,24 @@ const HourlyCard = ({ hourData }) => {
 // Main Weather Component
 const WeatherHourly = ({ hourlyWeatherData }) => {
   return (
-    <div className="hourly-weather">
-      <Row gutter={[16, 16]} justify="center">
-        {" "}
-        {/* Display cards in rows */}
-        {hourlyWeatherData.map((hour, index) => (
-          <Col key={index}>
-            <HourlyCard
-              hourData={{
-                time: new Date(hour.dt * 1000).toLocaleTimeString("en-US", {
-                  hour: "numeric",
-                  hour12: true,
-                }), // Convert timestamp to readable time
-                temp: hour.temp.toFixed(0),
-                icon: hour.weather[0].icon,
-              }}
-            />
-          </Col>
-        ))}
-      </Row>
+    <div className="flex justify-start items-center gap-3 overflow-scroll">
+      {hourlyWeatherData.map((hour, index)=>{
+        return(
+      <Col key={index}>
+        <HourlyCard
+          hourData={{
+            time: new Date(hour.dt * 1000).toLocaleTimeString("en-US", {
+              hour: "numeric",
+              hour12: true,
+            }),
+            temp: hour.temp.toFixed(0),
+            icon: hour.weather[0].icon,
+          }}
+        />
+      </Col>
+        )
+      })
+      }
     </div>
   );
 };

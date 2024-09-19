@@ -7,7 +7,7 @@ export const AdditionalInfo = ({ pic, label, value }) => {
   return (
     <div className=" w-2/4 flex mb-4 mt-4">
       <div className="w-1/4 flex justify-end">
-        <img src={pic} alt="" className="w-20 h-20" />
+        <img src={pic} alt="" className="w-16 h-16" />
       </div>
       <div className="w-3/4 flex flex-col justify-around items-start text-sub">
         <p

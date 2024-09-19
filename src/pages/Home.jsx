@@ -24,7 +24,7 @@ const Home = () => {
         <MenuSec />
       </div>
 
-      <div className="h-screen w-full">
+      <div className="h-screen max-w-[91dvw]">
         <div className="w-full p-6">
           <Header />
         </div>
