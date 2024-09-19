@@ -62,6 +62,7 @@ const WeatherToday = () => {
           <WeatherHourly hourlyWeatherData={hourlyWeather} />
         </div>
       </div>
+      
     </section>
   );
 };
