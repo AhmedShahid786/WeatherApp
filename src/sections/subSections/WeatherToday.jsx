@@ -57,6 +57,8 @@ const WeatherToday = () => {
           >
             Hourly Forecast
           </p>
+
+          <WeatherHourly hourlyWeatherData={hourlyWeather}/>
         </div>
       </div>
     </section>
