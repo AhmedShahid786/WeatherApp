@@ -20,11 +20,11 @@ const WeatherToday = () => {
     currentWeather.wind,
   ];
   return (
-    <section className="flex flex-col items-center justify-center pr-4 flex-wrap">
+    <section className="flex flex-col items-center justify-center pr-4 pt-2 flex-wrap">
       <div className="flex w-full">
-        <div className={`2 w-2/4 flex text-sub customFont`}>
+        <div className={`w-2/4 flex text-sub customFont`}>
           <WeatherData />
-          <div className="3 w-2/4 flex items-center justify-center">
+          <div className="w-2/4 flex items-center justify-center">
             <WeatherIcon />
           </div>
         </div>

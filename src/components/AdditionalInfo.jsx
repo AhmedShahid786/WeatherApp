@@ -11,7 +11,7 @@ export const AdditionalInfo = ({ pic, label, value }) => {
       </div>
       <div className="w-3/4 flex flex-col justify-around items-start text-sub">
         <p
-          className={`opacity-60 text-base
+          className={`text-base
           ${theme === "dark" ? "text-thirdD" : "text-thirdL"}`}
         >
           {label}

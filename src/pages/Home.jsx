@@ -4,8 +4,8 @@ import { useContext } from "react";
 //? Local components imports
 import Header from "../sections/Header";
 import MenuSec from "../sections/Menu"
-import Weather from "../sections/subSections/WeatherToday";
 import { themeContext } from "../contexts/ThemeContext";
+import Weather from "../sections/Weather";
 
 const Home = () => {
 
@@ -30,7 +30,7 @@ const Home = () => {
         </div>
 
         <div className="w-full pl-6">
-          <Weather />
+          <Weather/>
         </div>
       </div>
     </section>
