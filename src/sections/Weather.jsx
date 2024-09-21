@@ -6,6 +6,7 @@ import WeatherToday from "./subSections/WeatherToday";
 
 const Weather = () => {
   const {theme} = useContext(themeContext)
+  
   const [activeKey, setActiveKey] = useState("1");
   
   const items = [
@@ -53,7 +54,6 @@ const Weather = () => {
       }
       items={items}
       tabBarStyle={{ marginBottom: 0 }}
-      tabPaneStyle={{ paddingTop: 0 }}
     />
   );
 };
