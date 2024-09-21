@@ -4,19 +4,18 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MenuSec from "./sections/Menu"
 import Home from "./pages/Home";
 import Cities from "./pages/Cities"
-import Map from "./pages/Maps" 
+import Map from "./pages/map";
 import Settings from "./pages/settings";
 import Profile from "./pages/Profile"
 import "./index.css";
-import Settings from "./pages/settings";
 
 function App() {
   return (
     <BrowserRouter>
       <WeatherContextProvider>
         <ThemeContextProvider>
-          <Routes>
             <MenuSec />
+          <Routes>
             <Route index path="/" element={<Home/>}/>
             <Route path="/" element={<Home/>}/>
             <Route path="/cities" element={<Cities/>}/>
