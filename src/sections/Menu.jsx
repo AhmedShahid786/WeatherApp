@@ -1,5 +1,9 @@
-//? React imports
+//? All hooks are imported here
 import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router";
+
+//? Context imports
+import { themeContext } from "../contexts/ThemeContext";
 
 //? Ant design imports
 import {
@@ -12,7 +16,8 @@ import {
   MenuUnfoldOutlined,
 } from "@ant-design/icons";
 import { Button, Menu } from "antd";
-import { themeContext } from "../contexts/ThemeContext";
+
+//? Menu Items
 const items = [
   {
     key: "1",
@@ -37,17 +42,17 @@ const items = [
   },
   {
     key: "4",
-    label: "Settings",
     icon: <SettingOutlined className={`mr-4 !text-2xl 
-        "!mt-2
-        !ml-[-4px]`} />,
+      "!mt-2
+      !ml-[-4px]`} />,
+      label: "Settings",
   },
   {
     key: "5",
-    label: "Profile",
     icon: <UserOutlined className={`mr-4 !text-2xl 
-        "!mt-2
-        !ml-[-4px]`} />,
+      "!mt-2
+      !ml-[-4px]`} />,
+      label: "Profile",
   },
 ];
 
@@ -55,6 +60,11 @@ const items = [
 const App = () => {
 
     const {theme} = useContext(themeContext)
+
+    const navigate = useNavigate()
+    const handleClick = ()=>{
+      navigate(`${items.label}`)
+    }
 
   //? AntD Component Code
   const [collapsed, setCollapsed] = useState(false);
@@ -81,6 +91,7 @@ const App = () => {
         theme={theme}
         inlineCollapsed={collapsed}
         items={items}
+        onClick={handleClick}
         className={`text-lg customFont
     ${theme === "light" ? "bg-firstL" : "bg-firstD"}`}
       />
