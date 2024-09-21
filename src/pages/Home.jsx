@@ -3,11 +3,10 @@ import { useContext } from "react";
 
 //? Local components imports
 import Header from "../sections/Header";
-import MenuSec from "../sections/Menu"
-import { themeContext } from "../contexts/ThemeContext";
 import Weather from "../sections/Weather";
+import { themeContext } from "../contexts/ThemeContext";
 
-const Home = () => {
+function Home () {
 
   const {theme} = useContext(themeContext)
 
