@@ -16,8 +16,7 @@ function App() {
         <ThemeContextProvider>
             <MenuSec />
           <Routes>
-            <Route index path="/" element={<Home/>}/>
-            <Route path="/" element={<Home/>}/>
+            <Route index path="/weather" element={<Home/>}/>
             <Route path="/cities" element={<Cities/>}/>
             <Route path="/map" element={<Map/>}/>
             <Route path="/settings" element={<Settings/>}/>
