@@ -62,8 +62,11 @@ const App = () => {
     const {theme} = useContext(themeContext)
 
     const navigate = useNavigate()
-    const handleClick = ()=>{
-      navigate(`${items.label}`)
+    const handleClick = (e)=>{
+       const selectedItem = items.find((item) => item.key === e.key);
+       if (selectedItem) {
+         navigate(`/${selectedItem.label.toLowerCase()}`);
+       }
     }
 
   //? AntD Component Code
