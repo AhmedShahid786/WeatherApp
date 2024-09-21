@@ -2,7 +2,7 @@ import { WeatherContextProvider } from "./contexts/WeatherContext";
 import ThemeContextProvider, { themeContext } from "./contexts/ThemeContext";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MenuSec from "./sections/Menu"
-import Home from "./pages/Home";
+import Home from "./pages/Weather";
 import Cities from "./pages/Cities"
 import Map from "./pages/map";
 import Settings from "./pages/settings";

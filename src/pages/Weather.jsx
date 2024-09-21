@@ -3,7 +3,7 @@ import { useContext } from "react";
 
 //? Local components imports
 import Header from "../sections/Header";
-import Weather from "../sections/Weather";
+import Weather from "../sections/WeatherTabs";
 import { themeContext } from "../contexts/ThemeContext";
 
 function Home () {
