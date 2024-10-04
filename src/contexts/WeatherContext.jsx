@@ -54,11 +54,11 @@ fetchWeatherData()
             temp: res.data.current.temp,
             img: res.data.current.weather[0].icon,
             humidity: res.data.current.humidity,
-            feelsLike: res.data.current.feels_like,
+            feelsLike: Math.round(res.data.current.feels_like - 273.15),
             pressure: res.data.current.pressure,
             wind: res.data.current.wind_speed,
-            sunrise: res.data.current.sunrise,
-            sunset: res.data.current.sunset,
+            sunrise: new Date(res.data.current.sunrise).toLocaleTimeString(),
+            sunset: new Date(res.data.current.sunset).toLocaleTimeString(),
           });
 
           setHourlyWeather(res.data.hourly.slice(0, 23));
