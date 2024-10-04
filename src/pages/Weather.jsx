@@ -3,10 +3,11 @@ import { useContext } from "react";
 
 //? Local components imports
 import Header from "../sections/Header";
-import Weather from "../sections/WeatherTabs";
+import MenuSec from "../sections/Menu"
 import { themeContext } from "../contexts/ThemeContext";
+import WeatherTabs from "../sections/WeatherTabs";
 
-function Home () {
+const Weather = () => {
 
   const {theme} = useContext(themeContext)
 
@@ -16,6 +17,12 @@ function Home () {
     ${theme === "light" ? "bg-firstL" : "bg-firstD"}
     `}
     >
+      <div
+        className={`h-full 
+    ${theme === "light" ? "bg-firstL" : "bg-firstD"}`}
+      >
+        <MenuSec />
+      </div>
 
       <div className="h-screen max-w-[91dvw]">
         <div className="w-full p-6">
@@ -23,11 +30,11 @@ function Home () {
         </div>
 
         <div className="w-full pl-6">
-          <Weather/>
+          <WeatherTabs/>
         </div>
       </div>
     </section>
   );
 }
 
-export default Home
+export default Weather
