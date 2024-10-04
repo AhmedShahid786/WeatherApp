@@ -21,38 +21,63 @@ import { Button, Menu } from "antd";
 const items = [
   {
     key: "1",
-    icon: <AntCloudOutlined className={`mr-4 !text-2xl 
+    icon: (
+      <AntCloudOutlined
+        className={`mr-4 !text-2xl 
         "!mt-2
-        !ml-[-4px]`} />,
+        !ml-[-4px]`}
+      />
+    ),
     label: "Weather",
+    path: "/",
   },
   {
     key: "2",
-    icon: <UnorderedListOutlined className={`mr-4 !text-2xl 
+    icon: (
+      <UnorderedListOutlined
+        className={`mr-4 !text-2xl 
         "!mt-2
-        !ml-[-4px]`} />,
+        !ml-[-4px]`}
+      />
+    ),
     label: "Cities",
+    path: "cities",
   },
   {
     key: "3",
-    icon: <EnvironmentOutlined className={`mr-4 !text-2xl 
+    icon: (
+      <EnvironmentOutlined
+        className={`mr-4 !text-2xl 
         "!mt-2
-        !ml-[-4px]`} />,
+        !ml-[-4px]`}
+      />
+    ),
     label: "Map",
+    path: "/map",
   },
   {
     key: "4",
-    icon: <SettingOutlined className={`mr-4 !text-2xl 
+    icon: (
+      <SettingOutlined
+        className={`mr-4 !text-2xl 
       "!mt-2
-      !ml-[-4px]`} />,
-      label: "Settings",
+      !ml-[-4px]`}
+      />
+    ),
+    label: "Settings",
+    path: "/settings",
   },
   {
     key: "5",
-    icon: <UserOutlined className={`mr-4 !text-2xl 
+    icon: (
+      <UserOutlined
+        className={`mr-4 !text-2xl 
       "!mt-2
-      !ml-[-4px]`} />,
-      label: "Profile",
+      !ml-[-4px]`}
+      />
+    ),
+    label: "Profile",
+    path : "/profile"
   },
 ];
 
@@ -65,7 +90,7 @@ const App = () => {
     const handleClick = (e)=>{
        const selectedItem = items.find((item) => item.key === e.key);
        if (selectedItem) {
-         navigate(`/${selectedItem.label.toLowerCase()}`);
+         navigate(selectedItem.path);
        }
     }
 
@@ -76,28 +101,33 @@ const App = () => {
   };
   return (
     <div
-      className={`max-w-[256px] px-2 py-4 customFont
+      className={`h-full max-w-[20dvw] w-[10dvw]
+    ${theme === "light" ? "bg-firstL" : "bg-firstD"}`}
+    >
+      <div
+        className={`max-w-[256px] px-2 py-4 customFont
     ${theme === "light" ? "bg-firstL" : "bg-firstD"}
     `}
-    >
-      <Button
-        type="primary"
-        onClick={toggleCollapsed}
-        className={`mr-4 mt-2 ml-1 text-2xl mb-4 px-6 customFont`}
       >
-        {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        {/* <span className="text-lg">Menu</span> */}
-      </Button>
-      <Menu
-        defaultSelectedKeys={["1"]}
-        mode="inline"
-        theme={theme}
-        inlineCollapsed={collapsed}
-        items={items}
-        onClick={handleClick}
-        className={`text-lg customFont
+        <Button
+          type="primary"
+          onClick={toggleCollapsed}
+          className={`mr-4 mt-2 ml-1 text-2xl mb-4 px-6 customFont`}
+        >
+          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+          {/* <span className="text-lg">Menu</span> */}
+        </Button>
+        <Menu
+          defaultSelectedKeys={["1"]}
+          mode="inline"
+          theme={theme}
+          inlineCollapsed={collapsed}
+          items={items}
+          onClick={handleClick}
+          className={`text-lg customFont
     ${theme === "light" ? "bg-firstL" : "bg-firstD"}`}
-      />
+        />
+      </div>
     </div>
   );
 };
