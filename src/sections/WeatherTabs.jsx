@@ -4,7 +4,7 @@ import { themeContext } from "../contexts/ThemeContext";
 import WeatherToday from "./subSections/WeatherToday";
 
 
-const Weather = () => {
+const WeatherTabs = () => {
   const {theme} = useContext(themeContext)
   
   const [activeKey, setActiveKey] = useState("1");
@@ -58,4 +58,4 @@ const Weather = () => {
   );
 };
 
-export default Weather;
+export default WeatherTabs;
