@@ -1,6 +1,5 @@
 //? Hooks imports
 import { useContext, useEffect, useState } from "react";
-import MenuSec from "../sections/Menu";
 import { themeContext } from "../contexts/ThemeContext";
 
 //? Libraries' imports
@@ -84,14 +83,6 @@ function Cities() {
 
   return (
     <section className="h-screen w-screen flex">
-      {/* Menu Div */}
-      <div
-        className={`h-full 
-    ${theme === "light" ? "bg-firstL" : "bg-firstD"}`}
-      >
-        <MenuSec />
-      </div>
-
       {/* Main Div */}
       <div className="h-full w-full flex">
         {/* Add Citites Div */}
