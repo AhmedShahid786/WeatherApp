@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { WeatherContext } from "../../contexts/WeatherContext";
 
-import gifs from "../../assets/gifs/gifs";
+import additionalInfoIcons from "../../assets/images/images";
 import { WeatherIcon } from "../../components/WeatherIcon";
 import { WeatherData } from "../../components/WeatherData";
 import { AdditionalInfo } from "../../components/AdditionalInfo";
@@ -33,11 +33,11 @@ const WeatherToday = () => {
           className={`w-2/4 h-full flex flex-wrap justify-around items-center border-2 px-4 rounded-lg
           ${theme === "dark" ? "border-thirdD" : "border-thirdL"}`}
         >
-          {gifs.map((gif, ind) => {
+          {additionalInfoIcons.map((icon, ind) => {
             return (
               <AdditionalInfo
-                pic={gif.gif}
-                label={gif.label}
+                icon={icon.icon}
+                label={icon.label}
                 value={AdditionalInfoVals[ind]}
                 key={ind}
               />
@@ -62,7 +62,6 @@ const WeatherToday = () => {
           <WeatherHourly hourlyWeatherData={hourlyWeather} />
         </div>
       </div>
-      
     </section>
   );
 };
