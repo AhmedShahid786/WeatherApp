@@ -1,9 +1,18 @@
 import { useContext } from "react";
 import { themeContext } from "../contexts/ThemeContext";
+import { WeatherContext } from "../contexts/WeatherContext";
+import { useNavigate } from "react-router";
 
 export const CityListItem = ({city, handleCityDelete}) => {
 
     const {theme} = useContext(themeContext)
+    const {setCity} = useContext(WeatherContext)
+    const navigate = useNavigate()
+
+    const handleClick = () => {
+      setCity(city)
+      navigate("/")
+    }
 
   return (
     <div
@@ -30,6 +39,7 @@ export const CityListItem = ({city, handleCityDelete}) => {
           Delete
         </button>
         <button
+        onClick={handleClick}
           className={`border-2 px-2 text-base py-1 rounded-lg ${
             theme === "dark"
               ? "text-fourthD border-thirdD"
