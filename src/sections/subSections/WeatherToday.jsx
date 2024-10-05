@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { WeatherContext } from "../../contexts/WeatherContext";
 
-import additionalInfoIcons from "../../assets/images/images";
+import additionalInfoIcons from "../../assets/icons/icons";
 import { WeatherIcon } from "../../components/WeatherIcon";
 import { WeatherData } from "../../components/WeatherData";
 import { AdditionalInfo } from "../../components/AdditionalInfo";
