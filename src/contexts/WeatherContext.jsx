@@ -1,6 +1,7 @@
 //? React Imports
 import axios from "axios";
 import { createContext, useState, useEffect } from "react";
+import { weatherIcons } from "../assets/constants/constants";
 
 const WeatherContext = createContext();
 
@@ -49,16 +50,21 @@ fetchWeatherData()
       axios.get(oneCallUrl)
         .then((res) => {
           console.log(res);
+          const weatherId = res.data.current.weather[0].id; 
+          const iconObject = weatherIcons.find((icon) => icon.icon === weatherId);
+          // console.log("res.data.current.weather[0].id;", res.data.current.weather[0].id);
+          // console.log("iconObject", iconObject);
+          
           setCurrentWeather({
             desc: res.data.current.weather[0].description,
             temp: res.data.current.temp,
-            img: res.data.current.weather[0].icon,
+            img: iconObject.path,
             humidity: res.data.current.humidity,
             feelsLike: Math.round(res.data.current.feels_like - 273.15),
             pressure: res.data.current.pressure,
             wind: res.data.current.wind_speed,
-            sunrise: new Date(res.data.current.sunrise).toLocaleTimeString(),
-            sunset: new Date(res.data.current.sunset).toLocaleTimeString(),
+            sunrise: new Date(res.data.current.sunrise).toLocaleTimeString().replace(' AM', '').replace(' PM', ''),
+            sunset: new Date(res.data.current.sunset).toLocaleTimeString().replace(' AM', '').replace(' PM', ''),
           });
 
           setHourlyWeather(res.data.hourly.slice(0, 23));
