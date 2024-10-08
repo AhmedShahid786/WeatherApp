@@ -1,11 +1,9 @@
 import { useContext } from "react";
-import { WeatherContext } from "../contexts/WeatherContext";
 import { themeContext } from "../contexts/ThemeContext";
 
-export const WeatherData = () => {
-  const {theme} = useContext(themeContext)
-  const { currentWeather, city } = useContext(WeatherContext);
-  const {desc, temp} = currentWeather
+export const WeatherData = ({ currentWeather, city }) => {
+  const { theme } = useContext(themeContext);
+  const { desc, temp } = currentWeather;
   return (
     <div className="w-2/4">
       <div className="w-full py-8 flex flex-col items-start justify-start">
