@@ -1,10 +1,10 @@
-import humidityGif from "./humidity.gif"
-import pressureGif from "./pressure.gif"
-import feelsLikeGif from "./feelsLike.gif"
-import sunriseGif from "./sunrise.gif"
-import moonriseGif from "./moonrise.gif"
-import wind from "./wind.gif"
-import FormItemLabel from "antd/es/form/FormItemLabel"
+import humidityGif from "../icons/humidity.png";
+import pressureGif from "./pressure.gif";
+import feelsLikeGif from "./feelsLike.gif";
+import sunriseGif from "./sunrise.gif";
+import moonriseGif from "./moonrise.gif";
+import wind from "./wind.gif";
+import FormItemLabel from "antd/es/form/FormItemLabel";
 
 const gifs = [
   {
@@ -30,7 +30,7 @@ const gifs = [
   {
     gif: wind,
     label: "Wind",
-  }
+  },
 ];
 
-export default gifs
+export default gifs;

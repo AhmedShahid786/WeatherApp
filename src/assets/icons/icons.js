@@ -1,3 +1,4 @@
+//? Import statements for additional weather info icons
 import humidityIcon from "./humidity.png";
 import pressureIcon from "./pressure.png";
 import feelsLikeIcon from "./feelsLike.png";
@@ -5,36 +6,135 @@ import sunriseIcon from "./sunrise.png";
 import sunsetIcon from "./sunset.png";
 import windIcon from "./wind.png";
 
-const additionalInfoIcons = [
-  {
-    icon: humidityIcon,
-    label: "Humidity",
-  },
-  {
-    icon: pressureIcon,
-    label: "Pressure",
-  },
-  {
-    icon: feelsLikeIcon,
-    label: "Feels Like",
-  },
-  {
-    icon: sunriseIcon,
-    label: "Sunrise",
-  },
-  {
-    icon: sunsetIcon,
-    label: "Moonrise",
-  },
-  {
-    icon: windIcon,
-    label: "Wind",
-  },
-];
+//? Import statements for weather conditions icons
 
-export default additionalInfoIcons;
+//* Thunder Icons
+import thunderLightRain from "./thunderLightRain.png";
+import thunderRain from "./thunderRain.png";
+import thunderHeavyRain from "./thunderHeavyRain.png";
+import thunderLight from "./thunderLight.png";
+import thunder from "./thunder.png";
+import thunderHeavy from "./thunderHeavy.png";
+import thunderRagged from "./thunderRagged.png";
+import thunderDrizzle from "./thunderDrizzle.png";
+// Removed: thunderDrizzleHeavy (same as thunderDrizzle)
 
-// https://www.freepik.com/icon/thermometer_11325002#fromView=search&page=2&position=36&uuid=78f0a1ab-d0ca-451a-918e-2a5c46053b1f
-// https://www.freepik.com/icon/sunrise-alt_6854024#fromView=search&page=1&position=1&uuid=2dedb9e4-00e9-415b-b614-f249f1c55e6a
-// https://www.freepik.com/icon/sunset_6854030#fromView=search&page=1&position=14&uuid=71477d73-d532-4f5e-b402-db1521a74ab4
-// https://www.freepik.com/icon/wind_10035265#fromView=search&page=1&position=58&uuid=2125d588-657c-4d93-912e-ca5df70559a8
+//* Drizzle Icons
+import drizzle from "./drizzle.png";
+import heavyDrizzle from "./heavyDrizzle.png";
+import lightDrizzle from "./lightDrizzle.png";
+import drizzleRain from "./drizzleRain.png";
+import heavyDrizzleRain from "./heavyDrizzleRain.png";
+import showerRainDrizzle from "./showerRainDrizzle.png";
+import showerDrizzle from "./showerDrizzle.png";
+// Removed: heavyShowerRainDrizzle (same as heavyDrizzleRain)
+
+//* Rain Icons
+import lightRainD from "./lightRainD.png";
+import moderateRainD from "./moderateRainD.png";
+import heavyRainD from "./heavyRainD.png";
+import veryHeavyRainD from "./veryHeavyRainD.png";
+import extremeRainD from "./extremeRainD.png";
+import snow from "./snow.png"; // Same as freezing rain
+
+//* Snow Icons
+import lightSnow from "./lightSnow.png";
+import heavySnowD from "./heavySnowD.png";
+import showerSnowD from "./showerSnowD.png";
+// Removed: lightSnowShowers (same as lightSnow)
+// Removed: snowShowers (same as snow)
+// Removed: heavySnowShowers (same as heavySnowD)
+
+//* Atmosphere Icons
+import smoke from "./smoke.png";
+import haze from "./haze.png";
+import sandDust from "./sandDust.png"; // Same as sand, dust
+import fog from "./fog.png";
+// Removed: sandstorm (same as sandDust)
+// Removed: duststorm (same as sandDust)
+// Removed: volcanicAsh (same as sandDust)
+import tornado from "./tornado.png"; // Same as squalls
+
+//* Clear Icons
+import sun from "./sun.png"; // Clear sky
+
+//* Cloud Icons
+import cloudD from "./cloudD.png"; // Few clouds (11-25%)
+import scatteredClouds from "./scatteredClouds.png"; // Scattered clouds (25-50%)
+import brokenClouds from "./brokenClouds.png"; // Broken clouds (51-84%)
+import overcastClouds from "./overcastClouds.png"; // Overcast clouds (85-100%)
+
+//* Extreme Icons
+// import heavySnowD from "./heavySnowD.png"; // Cold
+import windy from "./windy.png"; // Windy
+
+//* Additional Icons
+import gale from "./gale.png"; // High wind, near gale
+
+//? Export statement for all icons
+export {
+    //* Additional weather info icons
+    humidityIcon,
+    pressureIcon,
+    feelsLikeIcon,
+    sunriseIcon,
+    sunsetIcon,
+    windIcon,
+
+    //* Thunder Icons
+    thunderLightRain,   
+    thunderRain,
+    thunderHeavyRain,
+    thunderLight,
+    thunder,
+    thunderHeavy,
+    thunderRagged,
+    thunderDrizzle,
+
+    //* Drizzle Icons
+    drizzle,
+    heavyDrizzle,
+    lightDrizzle,
+    drizzleRain,
+    heavyDrizzleRain,
+    showerRainDrizzle,
+    showerDrizzle,
+
+    //* Rain Icons
+    lightRainD,
+    moderateRainD,
+    heavyRainD,
+    veryHeavyRainD,
+    extremeRainD,
+    snow,
+
+    //* Snow Icons
+    lightSnow,
+    heavySnowD, 
+    showerSnowD,
+
+    //* Atmosphere Icons
+    smoke,
+    haze,
+    sandDust,
+    fog,
+    tornado,
+
+    //* Clear Icons
+    sun,
+
+    //* Cloud Icons
+    cloudD,
+    scatteredClouds,
+    brokenClouds,
+    overcastClouds,
+
+    //* Extreme Icons
+    // heavySnowD,
+    windy,
+
+    //* Additional Icons
+    gale,
+};
+
+// https://www.freepik.com/icon/down_13533656#fromView=search&page=1&position=91&uuid=312cf6b2-44a7-4268-a989-089b9ab02e36  

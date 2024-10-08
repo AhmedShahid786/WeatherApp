@@ -15,7 +15,7 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
 } from "@ant-design/icons";
-import { Button, Menu } from "antd";
+import { Button } from "antd";
 
 //? Menu Items
 const items = [
@@ -82,7 +82,7 @@ const items = [
 ];
 
 
-const App = () => {
+const Menu = () => {
 
     const {theme} = useContext(themeContext)
 
@@ -100,35 +100,9 @@ const App = () => {
     setCollapsed(!collapsed);
   };
   return (
-    <div
-      className={`h-full max-w-[20dvw] w-[10dvw]
-    ${theme === "light" ? "bg-firstL" : "bg-firstD"}`}
-    >
-      <div
-        className={`max-w-[256px] px-2 py-4 customFont
-    ${theme === "light" ? "bg-firstL" : "bg-firstD"}
-    `}
-      >
-        <Button
-          type="primary"
-          onClick={toggleCollapsed}
-          className={`mr-4 mt-2 ml-1 text-2xl mb-4 px-6 customFont`}
-        >
-          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-          {/* <span className="text-lg">Menu</span> */}
-        </Button>
-        <Menu
-          defaultSelectedKeys={["1"]}
-          mode="inline"
-          theme={theme}
-          inlineCollapsed={collapsed}
-          items={items}
-          onClick={handleClick}
-          className={`text-lg customFont
-    ${theme === "light" ? "bg-firstL" : "bg-firstD"}`}
-        />
-      </div>
-    </div>
+          <div className={`border h-full w-[9dvw] flex flex-col gap-4 items-center justify-center bg-transparent`}>
+            <div></div>
+          </div>  
   );
-};
-export default App;
+}
+export default Menu;

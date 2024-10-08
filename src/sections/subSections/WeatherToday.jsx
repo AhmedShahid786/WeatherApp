@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { WeatherContext } from "../../contexts/WeatherContext";
 
-import additionalInfoIcons from "../../assets/icons/icons";
+import { additionalInfoIcons } from "../../assets/constants/constants";
 import { WeatherIcon } from "../../components/WeatherIcon";
 import { WeatherData } from "../../components/WeatherData";
 import { AdditionalInfo } from "../../components/AdditionalInfo";
@@ -10,7 +10,7 @@ import WeatherHourly from "../../components/WeatherHourly";
 
 const WeatherToday = () => {
   const { theme } = useContext(themeContext);
-  const { currentWeather, hourlyWeather } = useContext(WeatherContext);
+  const { currentWeather, hourlyWeather, city } = useContext(WeatherContext);
   const AdditionalInfoVals = [
     currentWeather.humidity,
     currentWeather.pressure,
@@ -23,9 +23,9 @@ const WeatherToday = () => {
     <section className="flex flex-col items-center justify-center pr-4 pt-2 flex-wrap">
       <div className="flex w-full">
         <div className={`w-2/4 flex text-sub customFont`}>
-          <WeatherData />
-          <div className="w-2/4 flex items-center justify-center">
-            <WeatherIcon />
+          <WeatherData currentWeather={currentWeather} city={city} />
+          <div className="w-2/4 pt-8 flex items-center justify-center">
+            <WeatherIcon src={currentWeather.img} />
           </div>
         </div>
 
@@ -46,7 +46,7 @@ const WeatherToday = () => {
         </div>
       </div>
 
-      <div
+      {/* <div
         className={`w-full border-2 px-2 rounded-lg flex-wrap
           ${theme === "dark" ? "border-thirdD" : "border-thirdL"}`}
       >
@@ -61,7 +61,7 @@ const WeatherToday = () => {
         <div>
           <WeatherHourly hourlyWeatherData={hourlyWeather} />
         </div>
-      </div>
+      </div> */}
     </section>
   );
 };
