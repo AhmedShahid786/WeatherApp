@@ -12,7 +12,7 @@ const Weather = () => {
 
   return (
     <section
-      className={`w-screen h-screen flex customFont
+      className={`w-screen flex customFont overflow-scroll
     ${theme === "light" ? "bg-firstL" : "bg-firstD"}
     `}
     >

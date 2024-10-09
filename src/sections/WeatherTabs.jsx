@@ -2,6 +2,8 @@ import { Tabs } from "antd";
 import { useContext, useState } from "react";
 import { themeContext } from "../contexts/ThemeContext";
 import WeatherToday from "./subSections/WeatherToday";
+import WeatherTomorrow from "./subSections/WeatherTomorrow";
+import WeatherWeekly from "./subSections/WeatherWeekly";
 
 
 const WeatherTabs = () => {
@@ -26,7 +28,7 @@ const WeatherTabs = () => {
           Tomorrow
         </span>
       ),
-      children: "Content of Tab Pane 2",
+      children: <WeatherTomorrow/>,
     },
     {
       key: "3",
@@ -35,7 +37,7 @@ const WeatherTabs = () => {
           Next 7 Days
         </span>
       ),
-      children: "Content of Tab Pane 3",
+      children: <WeatherWeekly/>,
     },
   ];
 

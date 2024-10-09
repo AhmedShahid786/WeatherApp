@@ -6,7 +6,6 @@ import { WeatherIcon } from "../../components/WeatherIcon";
 import { WeatherData } from "../../components/WeatherData";
 import { AdditionalInfo } from "../../components/AdditionalInfo";
 import { themeContext } from "../../contexts/ThemeContext";
-import WeatherHourly from "../../components/WeatherHourly";
 
 const WeatherToday = () => {
   const { theme } = useContext(themeContext);
@@ -30,7 +29,7 @@ const WeatherToday = () => {
         </div>
 
         <div
-          className={`w-2/4 h-full flex flex-wrap justify-around items-center border-2 px-4 rounded-lg
+          className={`w-2/4 mt-4 h-full flex flex-wrap justify-around items-center border-2 px-4 rounded-lg
           ${theme === "dark" ? "border-thirdD" : "border-thirdL"}`}
         >
           {additionalInfoIcons.map((icon, ind) => {
