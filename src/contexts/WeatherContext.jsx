@@ -11,8 +11,15 @@ const WeatherContextProvider = ({ children }) => {
   const [city, setCity] = useState("")
   const [ currentWeather, setCurrentWeather ] = useState({}) 
   const [ hourlyWeather, setHourlyWeather ] = useState([])
-  const [ tomorrowWeather, setTomorrowWeather ] = useState([])
-  const [ weekWeather, setWeekWeather ] = useState([])
+  const [ tomorrowWeather, setTomorrowWeather ] = useState({})
+  const [ weeklyWeather, setWeeklyWeather ] = useState([])
+  const time = new Date().toLocaleTimeString();
+  const currentHour = time.split(":")[0];
+  let currentHourWeather
+  const findIcon = (iconId) => {
+     const iconObject = weatherIcons.find((icon) => icon.icon === iconId);
+     return iconObject.path;
+          };
   
   //? Get current city to display data by default and also get
   //? longitude and latitude for one call api 
@@ -50,33 +57,40 @@ fetchWeatherData()
       axios.get(oneCallUrl)
         .then((res) => {
           console.log(res);
-          const weatherId = res.data.current.weather[0].id; 
-          const iconObject = weatherIcons.find((icon) => icon.icon === weatherId);
-          // console.log("res.data.current.weather[0].id;", res.data.current.weather[0].id);
-          // console.log("iconObject", iconObject);
           
           setCurrentWeather({
             desc: res.data.current.weather[0].description,
             temp: res.data.current.temp,
-            img: iconObject.path,
+            img: findIcon(res.data.current.weather[0].id),
             humidity: res.data.current.humidity,
             feelsLike: Math.round(res.data.current.feels_like - 273.15),
             pressure: res.data.current.pressure,
             wind: res.data.current.wind_speed,
-            sunrise: new Date(res.data.current.sunrise).toLocaleTimeString().replace(' AM', '').replace(' PM', ''),
-            sunset: new Date(res.data.current.sunset).toLocaleTimeString().replace(' AM', '').replace(' PM', ''),
+            sunrise: new Date(res.data.current.sunrise).toLocaleTimeString(),
+            sunset: new Date(res.data.current.sunset).toLocaleTimeString(),
           });
-
           setHourlyWeather(res.data.hourly.slice(0, 23));
-          setTomorrowWeather(res.data.hourly.slice(24));
-          setWeekWeather(res.data.daily);
+          
+          currentHourWeather = res.data.hourly.slice(24)[currentHour]
+          setTomorrowWeather({
+            desc: currentHourWeather.weather[0].description,
+            temp: currentHourWeather.temp,
+            img: findIcon(currentHourWeather.weather[0].id),
+            humidity: currentHourWeather.humidity,
+            feelsLike: Math.round(currentHourWeather.feels_like - 273.15),
+            pressure: currentHourWeather.pressure,
+            wind: currentHourWeather.wind_speed,
+            sunrise: new Date(res.data.current.sunrise).toLocaleTimeString(),
+            sunset: new Date(res.data.current.sunset).toLocaleTimeString(),
+          });
+          setWeeklyWeather(res.data.daily);
         })
         .catch((err) => console.log("error in fetching weather", err));
     }).catch((err)=>console.log("Error in getting coardinates for onecall api", err))
 }, [city]);
 
   return (
-    <WeatherContext.Provider value={{ city, setCity, currentWeather, hourlyWeather, tomorrowWeather, weekWeather}}>
+    <WeatherContext.Provider value={{ city, setCity, currentWeather, hourlyWeather, tomorrowWeather, weeklyWeather}}>
       {children}
     </WeatherContext.Provider>
   );
