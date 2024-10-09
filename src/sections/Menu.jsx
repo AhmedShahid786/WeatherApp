@@ -4,80 +4,42 @@ import { useNavigate } from "react-router";
 
 //? Context imports
 import { themeContext } from "../contexts/ThemeContext";
+import { citiesIcon, cloudD, mapIcon, menuIcon, profileIcon, settingsIcon } from "../assets/icons/icons";
+import { Link } from "react-router-dom";
 
 //? Ant design imports
-import {
-  AntCloudOutlined,
-  UnorderedListOutlined,
-  EnvironmentOutlined,
-  SettingOutlined,
-  UserOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-} from "@ant-design/icons";
-import { Button } from "antd";
 
 //? Menu Items
 const items = [
   {
     key: "1",
-    icon: (
-      <AntCloudOutlined
-        className={`mr-4 !text-2xl 
-        "!mt-2
-        !ml-[-4px]`}
-      />
-    ),
+    icon: cloudD,
     label: "Weather",
     path: "/",
   },
   {
     key: "2",
-    icon: (
-      <UnorderedListOutlined
-        className={`mr-4 !text-2xl 
-        "!mt-2
-        !ml-[-4px]`}
-      />
-    ),
+    icon: citiesIcon,
     label: "Cities",
     path: "cities",
   },
   {
     key: "3",
-    icon: (
-      <EnvironmentOutlined
-        className={`mr-4 !text-2xl 
-        "!mt-2
-        !ml-[-4px]`}
-      />
-    ),
+    icon: mapIcon,
     label: "Map",
     path: "/map",
   },
   {
-    key: "4",
-    icon: (
-      <SettingOutlined
-        className={`mr-4 !text-2xl 
-      "!mt-2
-      !ml-[-4px]`}
-      />
-    ),
-    label: "Settings",
-    path: "/settings",
-  },
-  {
     key: "5",
-    icon: (
-      <UserOutlined
-        className={`mr-4 !text-2xl 
-      "!mt-2
-      !ml-[-4px]`}
-      />
-    ),
+    icon: profileIcon,
     label: "Profile",
     path : "/profile"
+  },
+  {
+    key: "4",
+    icon: settingsIcon,
+    label: "Settings",
+    path: "/settings",
   },
 ];
 
@@ -100,9 +62,21 @@ const Menu = () => {
     setCollapsed(!collapsed);
   };
   return (
-          <div className={`border h-full w-[9dvw] flex flex-col gap-4 items-center justify-center bg-transparent`}>
-            <div></div>
-          </div>  
+    <div
+      className={`h-full w-[9dvw] flex flex-col items-center justify-start bg-transparent`}
+    >
+      <div className="w-full h-1/6 flex items-center justify-center">
+        <img src={menuIcon} alt="" className="h-8 w-8 cursor-pointer" />
+      </div>
+
+      <div className="w-full h-4/6 flex flex-col items-center justify-evenly">
+        {items.map((item) => (
+          <Link to={item.path} key={item.key} className="w-full flex flex-col items-center justify-center">
+            <img src={item.icon} alt="" className="w-10 h-10" />
+          </Link>
+        ))}
+      </div>
+    </div>
   );
 }
 export default Menu;
