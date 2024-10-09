@@ -1,3 +1,10 @@
+//? Import statements for menu icons
+import menuIcon from "./menu.png"
+import citiesIcon from "./globe.png"
+import settingsIcon from "./settings.png"
+import mapIcon from "./map.png"
+import profileIcon from "./profile.png"
+
 //? Import statements for additional weather info icons
 import humidityIcon from "./humidity.png";
 import pressureIcon from "./pressure.png";
@@ -73,6 +80,13 @@ import gale from "./gale.png"; // High wind, near gale
 
 //? Export statement for all icons
 export {
+    //* Menu icons
+    menuIcon,
+    citiesIcon,
+    settingsIcon,
+    mapIcon,
+    profileIcon,
+
     //* Additional weather info icons
     humidityIcon,
     pressureIcon,
