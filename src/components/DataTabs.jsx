@@ -1,14 +1,6 @@
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
+import { Tab, TabGroup, TabList } from "@headlessui/react";
 
-export default function DataTabs({ handleCurrentDataKey, currentDataKey }) {
-  const data = [
-    "Temperature",
-    "Humidity",
-    "Wind",
-    "Pressure",
-    "Sunrise",
-    "Sunset",
-  ];
+export default function DataTabs({ data, handleCurrentDataKey, currentDataKey }) {
 
   return (
     <div className="w-full mt-4 flex items-center justify-start">

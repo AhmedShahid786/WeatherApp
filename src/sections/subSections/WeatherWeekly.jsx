@@ -43,10 +43,23 @@ export default function WeatherWeekly() {
     console.log(data);
   }, [weeklyWeather]);
 
+  const dataTabs = [
+    "Temperature",
+    "Humidity",
+    "Wind",
+    "Pressure",
+    "Sunrise",
+    "Sunset",
+  ];
+
   return (
     <section className="w-[90dvw]">
       <div className="h-80 w-full pr-4">
-        <DataTabs handleCurrentDataKey={handleCurrentDataKey} currentDataKey={currentDataKey}/>
+        <DataTabs
+          data={dataTabs}
+          handleCurrentDataKey={handleCurrentDataKey}
+          currentDataKey={currentDataKey}
+        />
         <ResponsiveContainer className="!w-full !h-full mt-4">
           <BarChart className={`h-[500px] !w-full p-0 ml-0 mt-8`} data={data}>
             <XAxis dataKey="date" />
