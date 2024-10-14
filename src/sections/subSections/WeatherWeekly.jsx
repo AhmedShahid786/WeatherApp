@@ -1,89 +1,58 @@
-import { LineChart } from "@tremor/react";
+import  { useContext, useEffect, useState } from "react";
+import { XAxis, ResponsiveContainer, BarChart, Bar } from "recharts";
+import { WeatherContext } from "../../contexts/WeatherContext";
 import DataTabs from "../../components/DataTabs";
 
 export default function WeatherWeekly() {
-const chartdata = [
-  {
-    date: "Jan 23",
-    SolarPanels: 2890,
-    Inverters: 2338,
-  },
-  {
-    date: "Feb 23",
-    SolarPanels: 2756,
-    Inverters: 2103,
-  },
-  {
-    date: "Mar 23",
-    SolarPanels: 3322,
-    Inverters: 2194,
-  },
-  {
-    date: "Apr 23",
-    SolarPanels: 3470,
-    Inverters: 2108,
-  },
-  {
-    date: "May 23",
-    SolarPanels: 3475,
-    Inverters: 1812,
-  },
-  {
-    date: "Jun 23",
-    SolarPanels: 3129,
-    Inverters: 1726,
-  },
-  {
-    date: "Jul 23",
-    SolarPanels: 3490,
-    Inverters: 1982,
-  },
-  {
-    date: "Aug 23",
-    SolarPanels: 2903,
-    Inverters: 2012,
-  },
-  {
-    date: "Sep 23",
-    SolarPanels: 2643,
-    Inverters: 2342,
-  },
-  {
-    date: "Oct 23",
-    SolarPanels: 2837,
-    Inverters: 2473,
-  },
-  {
-    date: "Nov 23",
-    SolarPanels: 2954,
-    Inverters: 3848,
-  },
-  {
-    date: "Dec 23",
-    SolarPanels: 3239,
-    Inverters: 3736,
-  },
-];
-  
+  const { weeklyWeather } = useContext(WeatherContext);
+  const [currentDataKey, setCurrentDataKey] = useState("temperature");
+  const handleCurrentDataKey = (dataKey) => {
+    setCurrentDataKey(dataKey);
+    console.log(currentDataKey);
+  };
+
+  const date = new Date();
+  const monthsArr = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "June",
+    "July",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const currentMonth = monthsArr[date.getMonth()];
+  let data = [];
+  useEffect(() => {
+    for (let i = 0; i < 7; i++) {
+      data.push({
+        date: currentMonth + " " + (date.getDate() + (i + 1)),
+        temperature: weeklyWeather.temperature[i],
+        humidity: weeklyWeather.humidity[i],
+        wind: weeklyWeather.wind[i],
+        pressure: weeklyWeather.pressure[i],
+        sunrise: weeklyWeather.sunrise[i],
+        sunset: weeklyWeather.sunset[i],
+      });
+    }
+    console.log(data);
+  }, [weeklyWeather]);
+
   return (
     <section className="w-[90dvw]">
-      <DataTabs />
-      <div className="h-80 w-full">
-        <LineChart
-          className="h-80"
-          data={chartdata}
-          index="date"
-          categories={["SolarPanels", "Inverters"]}
-          valueFormatter={(number) =>
-            `$${Intl.NumberFormat("us").format(number).toString()}`
-          }
-          onValueChange={(v) => console.log(v)}
-          xAxisLabel="Month"
-          yAxisLabel="Spend Category"
-        >
-          {/* <Line dataKey="SolarPanels" stroke="#8884d8" /> */}
-          {/* <Line dataKey="Inverters" stroke="#82ca9d" /> */}
-        </LineChart>
+      <div className="h-80 w-full pr-4">
+        <DataTabs handleCurrentDataKey={handleCurrentDataKey} currentDataKey={currentDataKey}/>
+        <ResponsiveContainer className="!w-full !h-full mt-4">
+          <BarChart className={`h-[500px] !w-full p-0 ml-0 mt-8`} data={data}>
+            <XAxis dataKey="date" />
+            <Bar dataKey={currentDataKey} fill="#00FFF5" />
+          </BarChart>
+        </ResponsiveContainer>
       </div>
     </section>
   );
