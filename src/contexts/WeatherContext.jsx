@@ -12,7 +12,8 @@ const WeatherContextProvider = ({ children }) => {
   const [ currentWeather, setCurrentWeather ] = useState({}) 
   const [ hourlyWeather, setHourlyWeather ] = useState([])
   const [ tomorrowWeather, setTomorrowWeather ] = useState({})
-  const [ weeklyWeather, setWeeklyWeather ] = useState([])
+  const [weeklyWeather, setWeeklyWeather] = useState({});
+  const [mapPosition, setMapPosition] = useState([])
   const time = new Date().toLocaleTimeString();
   const currentHour = time.split(":")[0];
   let currentHourWeather
@@ -58,6 +59,7 @@ fetchWeatherData()
         .then((res) => {
           console.log(res);
           
+         setMapPosition([res.data.lat, res.data.lon]);
           setCurrentWeather({
             desc: res.data.current.weather[0].description,
             temp: res.data.current.temp,
@@ -83,14 +85,48 @@ fetchWeatherData()
             sunrise: new Date(res.data.current.sunrise).toLocaleTimeString(),
             sunset: new Date(res.data.current.sunset).toLocaleTimeString(),
           });
-          setWeeklyWeather(res.data.daily);
+
+          const weeklyWeatherData = res.data.daily.slice(1, 8);
+          const updatedWeeklyWeather = {
+            temperature: [],
+            humidity: [],
+            wind: [],
+            pressure: [],
+            sunrise: [],
+            sunset: [],
+          };
+          for(let i=0 ; i < weeklyWeatherData.length; i++){
+            setWeeklyWeather(
+              updatedWeeklyWeather.temperature.push(weeklyWeatherData[i].temp.day),
+              updatedWeeklyWeather.humidity.push(weeklyWeatherData[i].humidity),
+              updatedWeeklyWeather.wind.push(weeklyWeatherData[i].wind_speed),
+              updatedWeeklyWeather.pressure.push(weeklyWeatherData[i].pressure),
+              updatedWeeklyWeather.sunrise.push(
+                new Date(weeklyWeatherData[i].sunset).toLocaleTimeString()
+              ),
+              updatedWeeklyWeather.sunset.push(
+                new Date(weeklyWeatherData[i].sunset).toLocaleTimeString()
+              )
+            );
+          }
+          setWeeklyWeather(updatedWeeklyWeather)
         })
         .catch((err) => console.log("error in fetching weather", err));
     }).catch((err)=>console.log("Error in getting coardinates for onecall api", err))
 }, [city]);
 
   return (
-    <WeatherContext.Provider value={{ city, setCity, currentWeather, hourlyWeather, tomorrowWeather, weeklyWeather}}>
+    <WeatherContext.Provider
+      value={{
+        city,
+        setCity,
+        currentWeather,
+        hourlyWeather,
+        tomorrowWeather,
+        weeklyWeather,
+        mapPosition
+      }}
+    >
       {children}
     </WeatherContext.Provider>
   );
