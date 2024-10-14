@@ -17,13 +17,13 @@ export const AdditionalInfo = ({ icon, label, value }) => {
           {label}
         </p>
         <p
-          className={`text-3xl
+          className={`text-2xl font-customFont
               ${theme === "dark" ? "text-fourthD" : "text-fourthL"}`}
         >
           {value}
           {label.includes("Feels Like") ? (
             <span
-              className={`text-4xl mb-auto
+              className={`text-2xl mb-auto
           ${theme === "dark" ? "text-fourthD" : "text-fourthL"}`}
             >
               {"\u00B0"}
