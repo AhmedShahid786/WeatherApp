@@ -2,7 +2,7 @@ import { WeatherContextProvider } from "./contexts/WeatherContext";
 import ThemeContextProvider from "./contexts/ThemeContext";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Weather from "./pages/Weather";
-import Cities from "./pages/Cities";
+import Cities from "./pages/Cities"
 import Map from "./pages/map";
 import Settings from "./pages/settings";
 import Profile from "./pages/Profile";
@@ -17,7 +17,7 @@ function App() {
           <Routes>
             <Route path="/" element={<RootLayout />}>
               <Route index element={<Weather />} />
-              <Route path="cities" element={<Cities />} />
+              <Route path="cities" element={<Cities/>} />
               <Route path="map" element={<Map />} />
               <Route path="settings" element={<Settings />} />
               <Route path="profile" element={<Profile />} />

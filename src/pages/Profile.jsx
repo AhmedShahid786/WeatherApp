@@ -1,7 +1,7 @@
 //? UI components imports
 import { Field, Input, Label } from '@headlessui/react'
 import { CheckCircleFilled, LoadingOutlined, UploadOutlined } from "@ant-design/icons";
-import { Avatar, Spin, message } from "antd";
+import { Spin, message } from "antd";
 
 //? Firebase  SDK imports
 import { auth, storage, db } from '../utils/firebaseConfig';

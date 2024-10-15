@@ -27,7 +27,8 @@ const fakeCities = [
   { id: 10, name: "San Jose" },
 ];
 
-function Cities() {
+
+export default function Cities() {
   const { theme } = useContext(themeContext);
 
   //? Cites state to store all the cities saved by the user
@@ -186,5 +187,3 @@ function Cities() {
     </section>
   );
 }
-
-export default Cities;

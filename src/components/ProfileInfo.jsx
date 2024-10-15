@@ -1,10 +1,15 @@
+//? UI components imports
 import { ArrowRightOutlined, LoadingOutlined } from "@ant-design/icons";
 import { Avatar, Spin } from "antd";
+
+//? Firebase  SDK imports
 import { signOut } from "firebase/auth";
-import { useEffect, useState } from "react";
 import { auth, db } from "../utils/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
+
+//? React imports
+import { useEffect, useState } from "react";
 
 export default function ProfileInfo({ setUser, successPopup, errorPopup }) {
   //? Loading state to display spinner for better UX
@@ -33,16 +38,19 @@ export default function ProfileInfo({ setUser, successPopup, errorPopup }) {
     return () => unsubscribe();
   }, []);
 
+  //? User's data fetching and display logic
   useEffect(() => {
-    // Only fetch user data if `uid` is available
+    //* Only fetch user data if uid is available
     const fetchUserData = async () => {
       if (uid) {
         try {
           setLoading(true);
+          //* Create refrence to user's docin db and fetch user data
           const userDocRef = doc(db, "weatherApp", uid);
           const userDocSnapshot = await getDoc(userDocRef);
           const userDoc = userDocSnapshot.data();
 
+          //* Set user obj to display user-profile info only if userDoc is not undefined
           if (userDoc) {
             setUserObj({
               email: userDoc.email,
@@ -50,6 +58,7 @@ export default function ProfileInfo({ setUser, successPopup, errorPopup }) {
               savedCities: userDoc.savedCities,
               profilePicUrl: userDoc.profilePicUrl,
             });
+            //* Show success message for better ux
             setLoading(false);
             successPopup("Logged In");
           } else {
@@ -67,12 +76,13 @@ export default function ProfileInfo({ setUser, successPopup, errorPopup }) {
     fetchUserData();
   }, [uid]);
 
+  //? Logic to log user out
   const logout = async () => {
     try {
       setLoading(true);
       await signOut(auth);
       setLoading(false);
-      setUser(false)
+      setUser(false);
       successPopup("Logged out");
     } catch (err) {
       setLoading(false);
@@ -150,9 +160,9 @@ export default function ProfileInfo({ setUser, successPopup, errorPopup }) {
             onClick={logout}
             className={`w-60 text-base font-customFont border-2 p-2 rounded-lg hover:rounded-full text-fourthD border-fourthD`}
           >
-              <p>
-                Logout <ArrowRightOutlined />
-              </p>
+            <p>
+              Logout <ArrowRightOutlined />
+            </p>
           </button>
         </div>
       )}
