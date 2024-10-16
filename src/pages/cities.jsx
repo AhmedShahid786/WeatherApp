@@ -2,7 +2,7 @@
 import { useContext, useEffect, useState } from "react";
 import { themeContext } from "../contexts/ThemeContext";
 
-//? Libraries' imports
+//? UI components imports
 import Spline from "@splinetool/react-spline";
 import { PlusOutlined } from "@ant-design/icons";
 import {
@@ -14,7 +14,7 @@ import {
 } from "@headlessui/react";
 import { CityListItem } from "../components/CityListItem";
 
-export const Cities = () => {
+function Cities(){
       const { theme } = useContext(themeContext);
 
       //? Cites state to store all the cities saved by the user
@@ -155,3 +155,5 @@ export const Cities = () => {
         </section>
       );
 };
+
+export default Cities

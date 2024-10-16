@@ -2,7 +2,7 @@ import { WeatherContextProvider } from "./contexts/WeatherContext";
 import ThemeContextProvider from "./contexts/ThemeContext";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Weather from "./pages/Weather";
-import { Cities } from "./pages/Cities";
+import Cities from "./pages/Cities";
 import Map from "./pages/map";
 import Settings from "./pages/settings";
 import Profile from "./pages/Profile";
