@@ -1,6 +1,8 @@
+//? Hooks imports
 import { useContext } from "react";
-import { WeatherContext } from "../../contexts/WeatherContext";
 
+//? Components imports
+import { WeatherContext } from "../../contexts/WeatherContext";
 import { additionalInfoIcons } from "../../assets/constants/constants";
 import { WeatherIcon } from "../../components/WeatherIcon";
 import { WeatherData } from "../../components/WeatherData";

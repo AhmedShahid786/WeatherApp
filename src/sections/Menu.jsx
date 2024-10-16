@@ -1,6 +1,5 @@
-//? All hooks are imported here
-import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router";
+//? Hooks imports
+import React, { useContext } from "react";
 
 //? Context imports
 import { themeContext } from "../contexts/ThemeContext";
@@ -9,12 +8,9 @@ import {
   cloudD,
   mapIcon,
   profileIcon,
-  settingsIcon,
   thunderRain,
 } from "../assets/icons/icons";
 import { Link } from "react-router-dom";
-
-//? Ant design imports
 
 //? Menu Items
 const items = [
@@ -41,31 +37,12 @@ const items = [
     icon: profileIcon,
     label: "Profile",
     path: "/profile",
-  },
-  {
-    key: "4",
-    icon: settingsIcon,
-    label: "Settings",
-    path: "/settings",
-  },
+  }
 ];
 
 const Menu = () => {
   const { theme } = useContext(themeContext);
 
-  const navigate = useNavigate();
-  const handleClick = (e) => {
-    const selectedItem = items.find((item) => item.key === e.key);
-    if (selectedItem) {
-      navigate(selectedItem.path);
-    }
-  };
-
-  //? AntD Component Code
-  const [collapsed, setCollapsed] = useState(false);
-  const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
-  };
   return (
     <div
       className={`h-full w-[9dvw] flex flex-col items-center justify-start bg-transparent border-r-2
