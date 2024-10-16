@@ -14,176 +14,144 @@ import {
 } from "@headlessui/react";
 import { CityListItem } from "../components/CityListItem";
 
-const fakeCities = [
-  { id: 1, name: "New York" },
-  { id: 2, name: "Los Angeles" },
-  { id: 3, name: "Chicago" },
-  { id: 4, name: "Houston" },
-  { id: 5, name: "Phoenix" },
-  { id: 6, name: "Philadelphia" },
-  { id: 7, name: "San Antonio" },
-  { id: 8, name: "San Diego" },
-  { id: 9, name: "Dallas" },
-  { id: 10, name: "San Jose" },
-];
+export const Cities = () => {
+      const { theme } = useContext(themeContext);
 
+      //? Cites state to store all the cities saved by the user
+      const [savedCities, setSavedCities] = useState([]);
 
-export default function Cities() {
-  const { theme } = useContext(themeContext);
+      useEffect(() => console.log("savedCities", savedCities), [savedCities]);
+      //?
+      const [inputValue, setInputValue] = useState("");
 
-  //? Cites state to store all the cities saved by the user
-  const [savedCities, setSavedCities] = useState([]);
+      //? Handle Submit
+      const handleSubmit = () => {
+        if (inputValue.trim() !== "") {
+          const arr = [...savedCities];
+          setSavedCities([...arr, inputValue.toLowerCase()]);
+          setInputValue("");
+          setIsOpen(false);
+        }
+      };
 
-  useEffect(() => console.log("savedCities", savedCities), [savedCities]);
-  //?
-  const [inputValue, setInputValue] = useState("");
+      //? Handle deleting a city
+      const handleCityDelete = (city) => {
+        const updatedCities = savedCities.filter((city) => city !== city);
+        setSavedCities(updatedCities);
+      };
 
-  //? Handle Submit
-  const handleSubmit = () => {
-    if (inputValue.trim() !== "") {
-      const arr = [...savedCities];
-      setSavedCities([...arr, inputValue.toLowerCase()]);
-      setInputValue("");
-      setIsOpen(false);
-    }
-  };
+      //? State to open and close dialogBox
+      let [isOpen, setIsOpen] = useState(false);
 
-  //? Handle deleting a city
-  const handleCityDelete = (city) => {
-    const updatedCities = savedCities.filter((city) => city !== city);
-    setSavedCities(updatedCities);
-  };
+      //? Open dialog on button click
+      const showDialog = () => {
+        setIsOpen(true);
+      };
 
-  //? Automatically fetch city names
-  //? store them to show suggestions when user is typing to add a city name
-  // useEffect(()=> {
-  //   fetch("http://api.geonames.org/countryInfoJSON?username=ahmedshahid")
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log(data); // Process the data to extract city names
-  //     });
-  // },[])
-
-  //? State to open and close dialogBox
-  let [isOpen, setIsOpen] = useState(false);
-
-  //? Open dialog on button click
-  const showDialog = () => {
-    setIsOpen(true);
-  };
-
-  // const [selectedCity, setSelectedCity] = useState(cities[0]);
-  const [query, setQuery] = useState("");
-
-  const filteredcities =
-    query === ""
-      ? fakeCities
-      : fakeCities.filter((city) => {
-          return city.name.toLowerCase().includes(query.toLowerCase());
-        });
-
-  return (
-    <section className="h-screen w-screen flex">
-      {/* Main Div */}
-      <div className="h-full w-full flex">
-        {/* Add Citites Div */}
-        <div className="w-1/2 h-full flex flex-col justify-evenly items-center  bg-black">
-          {/* Header Div */}
-          <div className="w-5/6 h-1/6 flex justify-between items-center">
-            <p
-              className={`text-5xl font-customFont
+      return (
+        <section className="h-screen w-screen flex">
+          {/* Main Div */}
+          <div className="h-full w-full flex">
+            {/* Add Citites Div */}
+            <div className="w-1/2 h-full flex flex-col justify-evenly items-center  bg-black">
+              {/* Header Div */}
+              <div className="w-5/6 h-1/6 flex justify-between items-center">
+                <p
+                  className={`text-5xl font-customFont
           ${theme === "dark" ? "text-fourthD" : "text-fourthL"}
           `}
-            >
-              Cities
-            </p>
-            {/* Open Cities Input Popover */}
-            <button
-              onClick={showDialog}
-              className={`text-base font-customFont border-2 p-2 rounded-lg
+                >
+                  Cities
+                </p>
+                {/* Open Cities Input Popover */}
+                <button
+                  onClick={showDialog}
+                  className={`text-base font-customFont border-2 p-2 rounded-lg
           ${
             theme === "dark"
               ? "text-fourthD border-fourthD"
               : "text-fourthL border-fourthL"
           }
           `}
-            >
-              <PlusOutlined /> Add City
-            </button>
-
-            {/* Modal centered on the screen */}
-            <Dialog
-              open={isOpen}
-              onClose={() => setIsOpen(false)}
-              className="relative z-50"
-            >
-              <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
-                <DialogPanel
-                  className={`w-96 space-y-4 bg-black p-4 border-2 rounded-xl ${
-                    theme === "dark"
-                      ? "text-thirdD border-fourthD"
-                      : "text-thirdL border-fourthL"
-                  }`}
                 >
-                  <DialogTitle className="font-customFont text-xl">
-                    Enter A City Name
-                  </DialogTitle>
-                  <Description>
-                    <Input
-                      value={inputValue}
-                      onChange={(event) => setInputValue(event.target.value)}
-                      className={`w-full bg-transparent font-customFont px-2 py-1 rounded-lg text-md border-2 ${
-                        theme === "dark"
-                          ? "text-thirdD border-fourthD"
-                          : "text-thirdL border-fourthL"
-                      }`}
-                    />
-                  </Description>
-                  <div className="flex justify-end gap-4">
-                    <button
-                      onClick={() => setIsOpen(false)}
-                      className={`border-2 px-2 text-md py-1 rounded-lg ${
-                        theme === "dark"
-                          ? "text-thirdD border-fourthD"
-                          : "text-thirdL border-fourthL"
-                      }`}
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      onClick={handleSubmit}
-                      className={`border-2 px-2 text-md py-1 rounded-lg ${
-                        theme === "dark"
-                          ? "text-thirdD border-fourthD"
-                          : "text-thirdL border-fourthL"
-                      }`}
-                    >
-                      Add
-                    </button>
-                  </div>
-                </DialogPanel>
-              </div>
-            </Dialog>
-          </div>
+                  <PlusOutlined /> Add City
+                </button>
 
-          {/* Cities List Div */}
-          <div
-            className={`w-5/6 h-4/6 flex flex-col items-center justify-start p-2 overflow-scroll`}
-          >
-            {savedCities?.map((cityName, ind) => (
-              <CityListItem
-                key={ind}
-                city={cityName}
-                handleCityDelete={handleCityDelete}
-              />
-            ))}
+                {/* Modal centered on the screen */}
+                <Dialog
+                  open={isOpen}
+                  onClose={() => setIsOpen(false)}
+                  className="relative z-50"
+                >
+                  <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
+                    <DialogPanel
+                      className={`w-96 space-y-4 bg-black p-4 border-2 rounded-xl ${
+                        theme === "dark"
+                          ? "text-thirdD border-fourthD"
+                          : "text-thirdL border-fourthL"
+                      }`}
+                    >
+                      <DialogTitle className="font-customFont text-xl">
+                        Enter A City Name
+                      </DialogTitle>
+                      <Description>
+                        <Input
+                          value={inputValue}
+                          onChange={(event) =>
+                            setInputValue(event.target.value)
+                          }
+                          className={`w-full bg-transparent font-customFont px-2 py-1 rounded-lg text-md border-2 ${
+                            theme === "dark"
+                              ? "text-thirdD border-fourthD"
+                              : "text-thirdL border-fourthL"
+                          }`}
+                        />
+                      </Description>
+                      <div className="flex justify-end gap-4">
+                        <button
+                          onClick={() => setIsOpen(false)}
+                          className={`border-2 px-2 text-md py-1 rounded-lg ${
+                            theme === "dark"
+                              ? "text-thirdD border-fourthD"
+                              : "text-thirdL border-fourthL"
+                          }`}
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          onClick={handleSubmit}
+                          className={`border-2 px-2 text-md py-1 rounded-lg ${
+                            theme === "dark"
+                              ? "text-thirdD border-fourthD"
+                              : "text-thirdL border-fourthL"
+                          }`}
+                        >
+                          Add
+                        </button>
+                      </div>
+                    </DialogPanel>
+                  </div>
+                </Dialog>
+              </div>
+
+              {/* Cities List Div */}
+              <div
+                className={`w-5/6 h-4/6 flex flex-col items-center justify-start p-2 overflow-scroll`}
+              >
+                {savedCities?.map((cityName, ind) => (
+                  <CityListItem
+                    key={ind}
+                    city={cityName}
+                    handleCityDelete={handleCityDelete}
+                  />
+                ))}
+              </div>
+            </div>
+            {/* Spline Div */}
+            <div className="w-1/2 h-full bg-black">
+              <Spline scene="https://prod.spline.design/B9gCGFUsdCoKNFqb/scene.splinecode" />
+            </div>
           </div>
-        </div>
-        {/* Spline Div */}
-        <div className="w-1/2 h-full bg-black">
-          <Spline scene="https://prod.spline.design/B9gCGFUsdCoKNFqb/scene.splinecode" />
-        </div>
-      </div>
-    </section>
-  );
-}
+        </section>
+      );
+};
