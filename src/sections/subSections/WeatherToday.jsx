@@ -1,11 +1,14 @@
+//? Hooks Imports
 import { useContext } from "react";
-import { WeatherContext } from "../../contexts/WeatherContext";
 
+//? Local imports
+import { WeatherContext } from "../../contexts/WeatherContext";
 import { additionalInfoIcons } from "../../assets/constants/constants";
 import { WeatherIcon } from "../../components/WeatherIcon";
 import { WeatherData } from "../../components/WeatherData";
 import { AdditionalInfo } from "../../components/AdditionalInfo";
 import { themeContext } from "../../contexts/ThemeContext";
+import WeatherHourly from "../../components/WeatherHourly";
 
 const WeatherToday = () => {
   const { theme } = useContext(themeContext);
@@ -45,13 +48,13 @@ const WeatherToday = () => {
         </div>
       </div>
 
-      {/* <div
-        className={`w-full border-2 px-2 rounded-lg flex-wrap
+      <div
+        className={`w-full border-2 px-2 rounded-lg flex-wrap mt-12 mb-4
           ${theme === "dark" ? "border-thirdD" : "border-thirdL"}`}
       >
         <div className="w-full">
           <p
-            className={`text-xl
+            className={`text-2xl font-customFont p-2
           ${theme === "dark" ? "text-thirdD" : "text-thirdL"}`}
           >
             Hourly Forecast
@@ -60,7 +63,7 @@ const WeatherToday = () => {
         <div>
           <WeatherHourly hourlyWeatherData={hourlyWeather} />
         </div>
-      </div> */}
+      </div>
     </section>
   );
 };

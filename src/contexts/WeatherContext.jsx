@@ -8,10 +8,12 @@ const WeatherContext = createContext();
 const WeatherContextProvider = ({ children }) => {
   const apiKey = "f258d4a7f76f264d7ac94454d85a6dc2";
 
+  const [loading, setLoading] = useState(false)
   const [city, setCity] = useState("")
   const [ currentWeather, setCurrentWeather ] = useState({}) 
   const [ hourlyWeather, setHourlyWeather ] = useState([])
   const [ tomorrowWeather, setTomorrowWeather ] = useState({})
+  const [ tomorrowHourlyWeather, setTomorrowHourlyWeather ] = useState([])
   const [weeklyWeather, setWeeklyWeather] = useState({});
   const [mapPosition, setMapPosition] = useState([])
   const time = new Date().toLocaleTimeString();
@@ -50,6 +52,7 @@ fetchWeatherData()
 
  useEffect(() => {
 
+    setLoading(true)  
     const coardinatesUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
     axios.get(coardinatesUrl)
     .then((res)=>{
@@ -71,9 +74,10 @@ fetchWeatherData()
             sunrise: new Date(res.data.current.sunrise).toLocaleTimeString(),
             sunset: new Date(res.data.current.sunset).toLocaleTimeString(),
           });
-          setHourlyWeather(res.data.hourly.slice(0, 23));
+          const hourlyArr = res.data.hourly.slice(0,23);
+          setHourlyWeather(hourlyArr.slice(currentHour - 1));
           
-          currentHourWeather = res.data.hourly.slice(24)[currentHour]
+          currentHourWeather = res.data.hourly.slice(23)[currentHour]
           setTomorrowWeather({
             desc: currentHourWeather.weather[0].description,
             temp: currentHourWeather.temp,
@@ -85,6 +89,9 @@ fetchWeatherData()
             sunrise: new Date(res.data.current.sunrise).toLocaleTimeString(),
             sunset: new Date(res.data.current.sunset).toLocaleTimeString(),
           });
+          const tomorrowHourlyArr = res.data.hourly.slice(23)
+          setTomorrowHourlyWeather(tomorrowHourlyArr.slice(currentHour))
+          
 
           const weeklyWeatherData = res.data.daily.slice(1, 8);
           const updatedWeeklyWeather = {
@@ -97,7 +104,7 @@ fetchWeatherData()
           };
           for(let i=0 ; i < weeklyWeatherData.length; i++){
             setWeeklyWeather(
-              updatedWeeklyWeather.temperature.push(weeklyWeatherData[i].temp.day),
+              updatedWeeklyWeather.temperature.push(Math.round(weeklyWeatherData[i].temp.day - 273.15)),
               updatedWeeklyWeather.humidity.push(weeklyWeatherData[i].humidity),
               updatedWeeklyWeather.wind.push(weeklyWeatherData[i].wind_speed),
               updatedWeeklyWeather.pressure.push(weeklyWeatherData[i].pressure),
@@ -110,9 +117,16 @@ fetchWeatherData()
             );
           }
           setWeeklyWeather(updatedWeeklyWeather)
+          setLoading(false)
         })
-        .catch((err) => console.log("error in fetching weather", err));
-    }).catch((err)=>console.log("Error in getting coardinates for onecall api", err))
+        .catch((err) => {
+          setLoading(false)
+          console.log("error in fetching weather", err);
+        });
+      }).catch((err)=>{
+      setLoading(false)
+      console.log("Error in getting coardinates for onecall api", err)
+    })
 }, [city]);
 
   return (
@@ -123,8 +137,10 @@ fetchWeatherData()
         currentWeather,
         hourlyWeather,
         tomorrowWeather,
+        tomorrowHourlyWeather,
         weeklyWeather,
-        mapPosition
+        mapPosition,
+        loading
       }}
     >
       {children}

@@ -8,10 +8,11 @@ import { WeatherIcon } from "../../components/WeatherIcon";
 import { WeatherData } from "../../components/WeatherData";
 import { AdditionalInfo } from "../../components/AdditionalInfo";
 import { themeContext } from "../../contexts/ThemeContext";
+import WeatherHourly from "../../components/WeatherHourly";
 
 const WeatherTomorrow = () => {
   const { theme } = useContext(themeContext);
-  const { tomorrowWeather, city } = useContext(WeatherContext);
+  const { tomorrowWeather, city, tomorrowHourlyWeather } = useContext(WeatherContext);
   
   const AdditionalInfoVals = [
     tomorrowWeather.humidity,
@@ -48,22 +49,22 @@ const WeatherTomorrow = () => {
         </div>
       </div>
 
-      {/* <div
-        className={`w-full border-2 px-2 rounded-lg flex-wrap
+      <div
+        className={`w-full border-2 px-2 rounded-lg flex-wrap mt-12 mb-4
           ${theme === "dark" ? "border-thirdD" : "border-thirdL"}`}
       >
         <div className="w-full">
           <p
-            className={`text-xl
+            className={`text-2xl font-customFont p-2
           ${theme === "dark" ? "text-thirdD" : "text-thirdL"}`}
           >
             Hourly Forecast
           </p>
         </div>
         <div>
-          <WeatherHourly hourlyWeatherData={hourlyWeather} />
+          <WeatherHourly hourlyWeatherData={tomorrowHourlyWeather} />
         </div>
-      </div> */}
+      </div>
     </section>
   );
 };

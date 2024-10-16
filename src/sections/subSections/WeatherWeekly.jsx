@@ -2,13 +2,16 @@
 import  { useContext, useEffect, useState } from "react";
 
 //? UI components imports
-import { XAxis, ResponsiveContainer, BarChart, Bar } from "recharts";
+import { XAxis, ResponsiveContainer, BarChart, Bar, Tooltip } from "recharts";
 
 //? Local imports
 import { WeatherContext } from "../../contexts/WeatherContext";
 import DataTabs from "../../components/DataTabs";
 
+import "../../index.css"
+
 export default function WeatherWeekly() {
+  
   //? Imoport weekly weather data from context
   const { weeklyWeather } = useContext(WeatherContext);
 
@@ -78,11 +81,24 @@ export default function WeatherWeekly() {
         />
         <ResponsiveContainer className="!w-full !h-full mt-4">
           <BarChart className={`h-[500px] !w-full p-0 ml-0 mt-8`} data={data}>
-            <XAxis dataKey="date" />
-            <Bar dataKey={currentDataKey} fill="#00FFF5" />
+            <XAxis dataKey="date" tick={{ fill: "#FF2E63" }} />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "#000",
+                borderRadius: "8px",
+                border: "2px solid #FF2E63",
+              }}
+              labelStyle={{ color: "#FF2E63" }}
+              itemStyle={{ color: "#00FFF5" }}
+            />
+            <Bar
+              dataKey={currentDataKey}
+              fill="#00FFF5"
+              stroke="#FF2E63"
+              strokeWidth={2}
+            />
           </BarChart>
         </ResponsiveContainer>
-        ;
       </div>
     </section>
   );
