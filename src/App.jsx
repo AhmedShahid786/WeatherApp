@@ -3,7 +3,7 @@ import ThemeContextProvider from "./contexts/ThemeContext";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Weather from "./pages/Weather";
 import City from "./pages/City";  
-import Map from "./pages/map";
+import Map from "./pages/Map";
 import Profile from "./pages/Profile";
 import RootLayout from "./pages/RootLayout";
 import "./index.css";
