@@ -1,5 +1,6 @@
 //? Hooks imports
 import React, { useContext } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 //? Context imports
 import { themeContext } from "../contexts/ThemeContext";
@@ -10,7 +11,6 @@ import {
   profileIcon,
   thunderRain,
 } from "../assets/icons/icons";
-import { Link } from "react-router-dom";
 
 //? Menu Items
 const items = [
@@ -24,7 +24,7 @@ const items = [
     key: "2",
     icon: citiesIcon,
     label: "Cities",
-    path: "cities",
+    path: "/cities",
   },
   {
     key: "3",
@@ -42,6 +42,7 @@ const items = [
 
 const Menu = () => {
   const { theme } = useContext(themeContext);
+  const location = useLocation(); 
 
   return (
     <div
@@ -61,7 +62,12 @@ const Menu = () => {
           <Link
             to={item.path}
             key={item.key}
-            className="w-full flex flex-col items-center justify-center"
+            className={`w-4/6 flex flex-col items-center justify-center
+              ${
+                location.pathname === item.path
+                  ? "border-2 border-thirdD rounded-lg py-2"
+                  : ""
+              }`}
           >
             <img src={item.icon} alt="" className="w-8 h-8" />
             <p
