@@ -2,9 +2,16 @@
 import { useContext, useEffect, useState } from "react";
 import { themeContext } from "../contexts/ThemeContext";
 
+//? Firebase  SDK imports
+import { auth, db } from "../utils/firebaseConfig";
+import { onAuthStateChanged  } from "firebase/auth";        
+import { doc, getDoc, setDoc } from "firebase/firestore";
+
 //? UI components imports
+import { CityListItem } from "../components/CityListItem";
 import Spline from "@splinetool/react-spline";
-import { PlusOutlined } from "@ant-design/icons";
+import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 import {
   Dialog,
   DialogPanel,
@@ -12,32 +19,114 @@ import {
   Description,
   Input,
 } from "@headlessui/react";
-import { CityListItem } from "../components/CityListItem";
 
 function City() {
+  //? Import theme state from context
   const { theme } = useContext(themeContext);
+
+  //? Loading state to display spinner for better UX
+  const [loading, setLoading] = useState(false);
 
   //? Cites state to store all the cities saved by the user
   const [savedCities, setSavedCities] = useState([]);
 
-  useEffect(() => console.log("savedCities", savedCities), [savedCities]);
-  //?
+  //? Input state to manage adding a city
   const [inputValue, setInputValue] = useState("");
 
+  //? States for firebase
+  const [userDoc, setUserDoc] = useState(false);
+  const [userId, setUserId] = useState("");
+
+  //? Initialize uid for referencing to each user's data in firestore-database
+  let uid;
+
+  //? Listener function to constantly check whether user is logged in or not
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        uid = user.uid;
+        setUserId(uid);
+        fetchCities(uid);
+      }
+    });
+
+    return () => unsubscribe(); //* Unsubscribe when component unmounts
+  }, []);
+
+  //? Fetch cities saved by the user
+  const fetchCities = async (uid) => {
+    setLoading(true)
+    try {
+      const citiesRef = doc(db, "weatherApp", uid);
+      const citiesRaw = await getDoc(citiesRef);
+      const citiesData = citiesRaw.data().savedCities.cities;
+      setSavedCities(citiesData);
+      setUserDoc(citiesRaw.data());
+      console.log("citiesData =>", citiesData);
+      setLoading(false)
+    } catch (err) {
+        console.log("error in fetching cities", err);
+        setLoading(false)
+    }
+  };
+
   //? Handle Submit
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (inputValue.trim() !== "") {
-      const arr = [...savedCities];
-      setSavedCities([...arr, inputValue.toLowerCase()]);
-      setInputValue("");
-      setIsOpen(false);
+      const updatedCities = [...savedCities, inputValue.toLowerCase().trim()];
+
+      //* Update the user object with the new city
+      const updatedUserDoc = {
+        ...userDoc,
+        savedCities: {
+          total: updatedCities.length, // Now it's correct
+          cities: updatedCities, // Updated cities array
+        },
+      };
+
+      //* Reference to the user's document
+      const userDocRef = doc(db, "weatherApp", userId);
+      try {
+        //* Update Firestore with the new user document
+        await setDoc(userDocRef, updatedUserDoc);
+
+        //* Clear the input and update state
+        setInputValue("");
+        setIsOpen(false);
+        fetchCities(userId)
+      } catch (err) {
+        console.error("Error updating document", err);
+      }
     }
   };
 
   //? Handle deleting a city
-  const handleCityDelete = (city) => {
-    const updatedCities = savedCities.filter((city) => city !== city);
-    setSavedCities(updatedCities);
+  const handleCityDelete = async (cityToDelete) => {
+    //* Filter out the city that needs to be deleted
+    const updatedCities = savedCities.filter((city) => city !== cityToDelete);
+
+    //* Update the user document with the new city list and total
+    const updatedUserDoc = {
+      ...userDoc,
+      savedCities: {
+        total: updatedCities.length,
+        cities: updatedCities,
+      },
+    };
+
+    //* Reference to the user's document in Firestore
+    const userDocRef = doc(db, "weatherApp", userId);
+
+    try {
+      //* Update Firestore with the new user document
+      await setDoc(userDocRef, updatedUserDoc);
+
+      //* Update local state with the new cities array
+      fetchCities(userId)
+      console.log(`${cityToDelete} deleted successfully`);
+    } catch (err) {
+      console.error("Error deleting city from Firestore", err);
+    }
   };
 
   //? State to open and close dialogBox
@@ -132,8 +221,21 @@ function City() {
             </Dialog>
           </div>
 
-          {/* Cities List Div */}
-          <div
+
+        {/* If loading then show loading icon else show content */}
+        {loading ? (
+        <Spin
+          indicator={
+            <LoadingOutlined
+              style={{
+                fontSize: 24,
+              }}
+              spin
+            />
+          }
+          size="small"
+        />
+      ) : (<div
             className={`w-5/6 h-4/6 flex flex-col items-center justify-start p-2 overflow-scroll`}
           >
             {savedCities?.map((cityName, ind) => (
@@ -144,6 +246,7 @@ function City() {
               />
             ))}
           </div>
+        )}
         </div>
         {/* Spline Div */}
         <div className="w-1/2 h-full bg-black">
