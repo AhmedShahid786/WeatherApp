@@ -89,7 +89,7 @@ export const weatherIcons = [
   { icon: 781, path: icons.tornado }, // Tornado
 
   // Clear Sky
-  { icon: 800, path: icons.sun }, // Clear sky
+  { icon: 800, path: icons.clearIcon }, // Clear sky
 
   // Cloud Icons
   { icon: 801, path: icons.cloudD }, // Few clouds (11-25%)

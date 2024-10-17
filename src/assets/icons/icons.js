@@ -64,6 +64,15 @@ import tornado from "./tornado.png"; // Same as squalls
 
 //* Clear Icons
 import sun from "./sun.png"; // Clear sky
+import moon from "./moon.png"; // Clear sky (Night)
+//* Determine whether it's day or night
+const isDayTime = () => {
+  const currentHour = new Date().getHours();
+  //* Assuming day time is from 6 AM to 6 PM
+  return currentHour >= 6 && currentHour < 18;
+};
+//* Set clear icon based on day or night
+const clearIcon = isDayTime() ? sun : moon;
 
 //* Cloud Icons
 import cloudD from "./cloudD.png"; // Few clouds (11-25%)
@@ -134,8 +143,8 @@ export {
     fog,
     tornado,
 
-    //* Clear Icons
-    sun,
+  //* Clear Icons
+    clearIcon,
 
     //* Cloud Icons
     cloudD,
