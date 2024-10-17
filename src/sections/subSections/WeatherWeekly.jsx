@@ -67,8 +67,6 @@ export default function WeatherWeekly() {
     "Humidity",
     "Wind",
     "Pressure",
-    "Sunrise",
-    "Sunset",
   ];
 
   return (
