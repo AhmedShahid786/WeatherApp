@@ -1,20 +1,57 @@
 //? React imports
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { themeContext } from "../contexts/ThemeContext.jsx";
 
-//? Ant design components imports
-import { Input, Switch, Avatar } from "antd";
-//? Ant design icons imports
+//? Firebase SDks imports
+import { auth, db } from "../utils/firebaseConfig";
+import { onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+
+//? UI components imports
+import { Input, Avatar } from "antd";
 import { MoonOutlined, SunOutlined, SearchOutlined } from "@ant-design/icons";
 import { WeatherContext } from "../contexts/WeatherContext.jsx";
+import { useNavigate } from "react-router";
 
 const Header = () => {
   const { theme, setTheme } = useContext(themeContext);
   const handleChange = () => setTheme(theme === "light" ? "dark" : "light");
 
   const [inputValue, setInputValue] = useState("");
-  const { city,setCity } = useContext(WeatherContext);
+  const { city, setCity } = useContext(WeatherContext);
+  const [src, setSrc] = useState("");
   const handleSearch = (inputValue) => setCity(inputValue);
+
+  //? Initialize uid for referencing to each user's data in firestore-database
+  let uid;
+  //? Listener function to constantly check whether user is logged in or not
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        uid = user.uid;
+        fetchImage(uid);
+      }
+    });
+
+    return () => unsubscribe(); //* Unsubscribe when component unmounts
+  }, []);
+
+  //? Fetch cities saved by the user
+  const fetchImage = async (uid) => {
+    try {
+      const imageRef = doc(db, "weatherApp", uid);
+      const imageRaw = await getDoc(imageRef);
+      const imageSrc = imageRaw.data().profilePicUrl;
+      setSrc(imageSrc);
+    } catch (err) {
+      console.log("error in fetching cities", err);
+    }
+  };
+
+  const navigate = useNavigate()
+  const handleNavigate = () => {
+    navigate("/profile")
+  }
 
   return (
     <section className="flex justify-between items-center ">
@@ -52,10 +89,12 @@ const Header = () => {
       />
 
       <Avatar
+        src={src}
+        onClick={handleNavigate}
         size="large"
         className={`${
           theme === "dark" ? "border-thirdD" : "border-thirdL"
-        } border-2`}
+        } border-2 cursor-pointer`}
       />
     </section>
   );
