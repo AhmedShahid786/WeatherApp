@@ -4,90 +4,27 @@ import { Avatar, Spin } from "antd";
 
 //? Firebase  SDK imports
 import { signOut } from "firebase/auth";
-import { auth, db } from "../utils/firebaseConfig";
-import { onAuthStateChanged } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
-
+import { auth } from "../utils/firebaseConfig";
 //? React imports
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-export default function ProfileInfo({ setUser, successPopup, errorPopup }) {
+export default function ProfileInfo({ userObj, successPopup, errorPopup, setUser }) {
   //? Loading state to display spinner for better UX
   const [loading, setLoading] = useState(false);
-
-  //? Uid state to keep user's uid updated
-  const [uid, setUid] = useState();
-
-  //? Schema for user's basic data
-  const [userObj, setUserObj] = useState({
-    email: "",
-    username: "",
-    profilePicUrl: "",
-    savedCities: 0,
-  });
-
-  //? Listener function to constantly check whether user is logged in or not
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        setUid(user.uid);
-      } else {
-        setUid(null);
-      }
-    });
-    return () => unsubscribe();
-  }, []);
-
-  //? User's data fetching and display logic
-  useEffect(() => {
-    //* Only fetch user data if uid is available
-    const fetchUserData = async () => {
-      if (uid) {
-        try {
-          setLoading(true);
-          //* Create refrence to user's docin db and fetch user data
-          const userDocRef = doc(db, "weatherApp", uid);
-          const userDocSnapshot = await getDoc(userDocRef);
-          const userDoc = userDocSnapshot.data();
-
-          //* Set user obj to display user-profile info only if userDoc is not undefined
-          if (userDoc) {
-            setUserObj({
-              email: userDoc.email,
-              username: userDoc.username,
-              savedCities: userDoc.savedCities,
-              profilePicUrl: userDoc.profilePicUrl,
-            });
-            //* Show success message for better ux
-            setLoading(false);
-            successPopup("Logged In");
-          } else {
-            errorPopup("User document not found.");
-            setLoading(false);
-          }
-        } catch (err) {
-          console.log("Error retrieving userDoc", err);
-          errorPopup("An error occurred while retrieving user data.");
-          setLoading(false);
-        }
-      }
-    };
-
-    fetchUserData();
-  }, [uid]);
+  
 
   //? Logic to log user out
   const logout = async () => {
     try {
-      setLoading(true);
       await signOut(auth);
-      setLoading(false);
-      setUser(false);
+      setLoading(true);
       successPopup("Logged out");
     } catch (err) {
-      setLoading(false);
       errorPopup("Error logging out");
-      console.log("Error logging out =>", err);
+      console.error("Error logging out =>", err);
+    } finally {
+      setLoading(false);
+      setUser(false)
     }
   };
 
@@ -108,7 +45,7 @@ export default function ProfileInfo({ setUser, successPopup, errorPopup }) {
       ) : (
         <div className="w-2/4 flex flex-col justify-center items-center gap-8">
           <Avatar
-            src={userObj.profilePicUrl}
+            src={userObj?.profilePicUrl}
             size={{
               xs: 24,
               sm: 32,
@@ -121,38 +58,38 @@ export default function ProfileInfo({ setUser, successPopup, errorPopup }) {
           />
           <div className={`w-full flex border-2 border-thirdD p-2 rounded-lg`}>
             <p
-              className={`w-1/2 text-center text-2xl font-customFont text-fourthD opacity-95`}
+              className={`w-1/2 text-center text-xl font-customFont text-fourthD opacity-95`}
             >
               Username
             </p>
             <p
-              className={`w-1/2 text-center text-2xl font-customFont text-fourthD`}
+              className={`w-1/2 text-center text-xl font-customFont text-fourthD`}
             >
-              {userObj.username}
+              {userObj?.username}
             </p>
           </div>
           <div className={`w-full flex border-2 border-thirdD p-2 rounded-lg`}>
             <p
-              className={`w-1/2 text-center text-2xl font-customFont text-fourthD opacity-95`}
+              className={`w-1/2 text-center text-xl font-customFont text-fourthD opacity-95`}
             >
               Email
             </p>
             <p
-              className={`w-1/2 text-center text-2xl font-customFont text-fourthD`}
+              className={`w-1/2 text-center text-xl font-customFont text-fourthD`}
             >
-              {userObj.email}
+              {userObj?.email}
             </p>
           </div>
           <div className={`w-full flex border-2 border-thirdD p-2 rounded-lg`}>
             <p
-              className={`w-1/2 text-center text-2xl font-customFont text-fourthD opacity-95`}
+              className={`w-1/2 text-center text-xl font-customFont text-fourthD opacity-95`}
             >
               Saved-Cities
             </p>
             <p
-              className={`w-1/2 text-center text-2xl font-customFont text-fourthD`}
+              className={`w-1/2 text-center text-xl font-customFont text-fourthD`}
             >
-              {userObj.savedCities}
+              {userObj?.savedCities.total}
             </p>
           </div>
 
