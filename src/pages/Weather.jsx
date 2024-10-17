@@ -1,6 +1,8 @@
 //? Hooks imports
 import { useContext } from "react";
-import { Spin } from "antd";
+
+//? UI components imports
+import { Spin, message } from "antd";
 import {LoadingOutlined} from "@ant-design/icons";
 
 //? Local components imports
@@ -10,9 +12,23 @@ import WeatherTabs from "../sections/WeatherTabs";
 import { WeatherContext } from "../contexts/WeatherContext";
 
 const Weather = () => {
+  const { theme } = useContext(themeContext);
+  const { loading, locationRequest } = useContext(WeatherContext);
 
-  const {theme} = useContext(themeContext)
-  const {loading} = useContext(WeatherContext)
+  //? State to display popover message componenet by antDesign
+  const [messageApi, contextHolder] = message.useMessage();
+
+  //? Function to show error message popup
+  const errorPopup = (errorCode) => {
+    messageApi.open({
+      type: "error",
+      content: errorCode,
+    });
+  };
+
+  if(locationRequest){
+    errorPopup("Please allow location access to view your location's weather")
+  }
 
   return (
     <section
@@ -20,6 +36,9 @@ const Weather = () => {
     ${theme === "light" ? "bg-firstL" : "bg-firstD"}
     `}
     >
+      {/* Necessary to include it in order to show popup messages */}
+      {contextHolder}
+
       {loading ? (
         <div className="h-screen min-w-[91dvw] flex justify-center items-center">
           <Spin indicator={<LoadingOutlined spin />} size="large" />
