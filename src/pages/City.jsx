@@ -10,7 +10,7 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 //? UI components imports
 import { CityListItem } from "../components/CityListItem";
 import Spline from "@splinetool/react-spline";
-import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import { ArrowRightOutlined, LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import {
   Dialog,
@@ -19,6 +19,7 @@ import {
   Description,
   Input,
 } from "@headlessui/react";
+import { Link } from "react-router-dom";
 
 function City() {
   //? Import theme state from context
@@ -36,6 +37,7 @@ function City() {
   //? States for firebase
   const [userDoc, setUserDoc] = useState(false);
   const [userId, setUserId] = useState("");
+  const [isUser, setIsUser] = useState(false)
 
   //? Initialize uid for referencing to each user's data in firestore-database
   let uid;
@@ -45,6 +47,7 @@ function City() {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         uid = user.uid;
+        setIsUser(true)
         setUserId(uid);
         fetchCities(uid);
       }
@@ -172,81 +175,106 @@ function City() {
               onClose={() => setIsOpen(false)}
               className="relative z-50"
             >
+              {/* If user is logged in then show input otherwise show link to signup page */}
               <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
-                <DialogPanel
-                  className={`w-96 space-y-4 bg-black p-4 border-2 rounded-xl ${
-                    theme === "dark"
-                      ? "text-thirdD border-fourthD"
-                      : "text-thirdL border-fourthL"
-                  }`}
-                >
-                  <DialogTitle className="font-customFont text-xl">
-                    Enter A City Name
-                  </DialogTitle>
-                  <Description>
-                    <Input
-                      value={inputValue}
-                      onChange={(event) => setInputValue(event.target.value)}
-                      className={`w-full bg-transparent font-customFont px-2 py-1 rounded-lg text-md border-2 ${
-                        theme === "dark"
-                          ? "text-thirdD border-fourthD"
-                          : "text-thirdL border-fourthL"
-                      }`}
-                    />
-                  </Description>
-                  <div className="flex justify-end gap-4">
+                {isUser ? (
+                  <DialogPanel
+                    className={`w-96 space-y-4 bg-black p-4 border-2 rounded-xl ${
+                      theme === "dark"
+                        ? "text-thirdD border-fourthD"
+                        : "text-thirdL border-fourthL"
+                    }`}
+                  >
+                    <DialogTitle className="font-customFont text-xl">
+                      Enter A City Name
+                    </DialogTitle>
+                    <Description>
+                      <Input
+                        value={inputValue}
+                        onChange={(event) => setInputValue(event.target.value)}
+                        className={`w-full bg-transparent font-customFont px-2 py-1 rounded-lg text-md border-2 ${
+                          theme === "dark"
+                            ? "text-thirdD border-fourthD"
+                            : "text-thirdL border-fourthL"
+                        }`}
+                      />
+                    </Description>
+                    <div className="flex justify-end gap-4">
+                      <button
+                        onClick={() => setIsOpen(false)}
+                        className={`border-2 px-2 text-md py-1 rounded-lg ${
+                          theme === "dark"
+                            ? "text-thirdD border-fourthD"
+                            : "text-thirdL border-fourthL"
+                        }`}
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={handleSubmit}
+                        className={`border-2 px-2 text-md py-1 rounded-lg ${
+                          theme === "dark"
+                            ? "text-thirdD border-fourthD"
+                            : "text-thirdL border-fourthL"
+                        }`}
+                      >
+                        Add
+                      </button>
+                    </div>
+                  </DialogPanel>
+                ) : (
+                  <DialogPanel
+                    className={`w-96 space-y-4 bg-black p-4 border-2 rounded-xl ${
+                      theme === "dark"
+                        ? "text-thirdD border-fourthD"
+                        : "text-thirdL border-fourthL"
+                    }`}
+                  >
+                    <DialogTitle className="font-customFont text-xl">
+                      Please login to add city
+                    </DialogTitle>
                     <button
-                      onClick={() => setIsOpen(false)}
-                      className={`border-2 px-2 text-md py-1 rounded-lg ${
+                      className={`border-2 px-2 text-base py-1 rounded-lg ${
                         theme === "dark"
                           ? "text-thirdD border-fourthD"
                           : "text-thirdL border-fourthL"
                       }`}
                     >
-                      Cancel
+                      <Link to={"/profile"}>Go to login page</Link>
+                      <ArrowRightOutlined className="text-base ml-1" />
                     </button>
-                    <button
-                      onClick={handleSubmit}
-                      className={`border-2 px-2 text-md py-1 rounded-lg ${
-                        theme === "dark"
-                          ? "text-thirdD border-fourthD"
-                          : "text-thirdL border-fourthL"
-                      }`}
-                    >
-                      Add
-                    </button>
-                  </div>
-                </DialogPanel>
+                  </DialogPanel>
+                )}
               </div>
             </Dialog>
           </div>
 
-
-        {/* If loading then show loading icon else show content */}
-        {loading ? (
-        <Spin
-          indicator={
-            <LoadingOutlined
-              style={{
-                fontSize: 24,
-              }}
-              spin
+          {/* If loading then show loading icon else show content */}
+          {loading ? (
+            <Spin
+              indicator={
+                <LoadingOutlined
+                  style={{
+                    fontSize: 24,
+                  }}
+                  spin
+                />
+              }
+              size="small"
             />
-          }
-          size="small"
-        />
-      ) : (<div
-            className={`w-5/6 h-4/6 flex flex-col items-center justify-start p-2 overflow-scroll`}
-          >
-            {savedCities?.map((cityName, ind) => (
-              <CityListItem
-                key={ind}
-                city={cityName}
-                handleCityDelete={handleCityDelete}
-              />
-            ))}
-          </div>
-        )}
+          ) : (
+            <div
+              className={`w-5/6 h-4/6 flex flex-col items-center justify-start p-2 overflow-scroll`}
+            >
+              {savedCities?.map((cityName, ind) => (
+                <CityListItem
+                  key={ind}
+                  city={cityName}
+                  handleCityDelete={handleCityDelete}
+                />
+              ))}
+            </div>
+          )}
         </div>
         {/* Spline Div */}
         <div className="w-1/2 h-full bg-black">
