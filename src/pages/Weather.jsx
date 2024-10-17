@@ -1,5 +1,5 @@
 //? Hooks imports
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 //? UI components imports
 import { Spin, message } from "antd";
@@ -26,9 +26,14 @@ const Weather = () => {
     });
   };
 
-  if(locationRequest){
-    errorPopup("Please allow location access to view your location's weather")
-  }
+  //? UseEffect to show the error popup only when locationRequest changes
+  useEffect(() => {
+    if (locationRequest) {
+      errorPopup(
+        "Please allow location access to view your location's weather"
+      );
+    }
+  }, [locationRequest]);
 
   return (
     <section
