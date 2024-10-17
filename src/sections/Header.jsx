@@ -55,24 +55,33 @@ const Header = () => {
 
   return (
     <section className="flex justify-between items-center ">
-      <Input
-        placeholder="Search Cities"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        onPressEnter={() => handleSearch(inputValue)}
-        prefix={
-          <SearchOutlined
-            className={`${theme === "dark" ? "text-thirdD" : "text-thirdL"}`}
-          />
-        }
-        className={`w-4/5 bg-transparent hover:bg-transparent active:bg-transparent text-xl placeholder:text-sub py-2 border-2
+      <div
+        className={`w-4/5 flex bg-transparent !font-customFont hover:bg-transparent active:bg-transparent 
+        focus:border-thirdD focus:border-2 focus:outline-none rounded-lg text-xl placeholder:text-sub 
+        py-2 border-2 placeholder:text-fourthD font-customFont
           ${
             theme === "dark"
               ? "border-thirdD text-fourthD"
               : "border-thirdL text-fourthL"
-          }
-          `}
-      />
+          } pl-4 gap-2`}
+      >
+        <SearchOutlined/>
+        <input
+          type="text"
+          placeholder="Search Cities"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleSearch(inputValue)}
+          className={`w-full bg-transparent !font-customFont hover:bg-transparent active:bg-transparent 
+         focus:outline-none rounded-lg text-xl placeholder:text-sub
+        placeholder:text-fourthD font-customFont
+          ${
+            theme === "dark"
+              ? "border-thirdD text-fourthD"
+              : "border-thirdL text-fourthL"
+          }`}
+        />
+      </div>
 
       <Avatar
         size="large"
