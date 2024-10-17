@@ -40,7 +40,10 @@ function Profile () {
     email: "",
     username: "",
     profilePicUrl: null,
-    savedCities: 0,
+    savedCities: {
+      total : 0,
+      cities : []
+    },
   };
 
   //? Function to show error message popup
