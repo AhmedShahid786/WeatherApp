@@ -8,7 +8,7 @@ export const WeatherData = ({ currentWeather, city }) => {
     <div className="w-2/4">
       <div className="w-full py-8 flex flex-col items-start justify-start">
         <p
-          className={`text-5xl mb-4
+          className={`sm:text-5xl text-4xl mb-4
           ${theme === "dark" ? "text-fourthD" : "text-fourthL"}
           `}
         >
@@ -23,7 +23,7 @@ export const WeatherData = ({ currentWeather, city }) => {
       </div>
       <div className="w-full flex justify-start items-center">
         <p
-          className={`text-9xl
+          className={`sm:text-9xl text-8xl
           ${theme === "dark" ? "text-fourthD" : "text-fourthL"}`}
         >
           {temp ? Math.round(temp - 273.15) : ""}
