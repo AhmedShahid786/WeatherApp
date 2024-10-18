@@ -21,7 +21,7 @@ const Map = () => {
 
   return (
     <MapContainer
-      center={mapPosition}
+      center={mapPosition ? mapPosition : null}
       zoom={7}
       style={{ height: "100vh", width: "100%" }}
     >
@@ -29,7 +29,7 @@ const Map = () => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      <Marker position={mapPosition}>
+      <Marker position={mapPosition ? mapPosition : null}>
         <Popup>You're Here</Popup>
       </Marker>
     </MapContainer>

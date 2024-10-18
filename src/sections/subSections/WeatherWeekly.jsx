@@ -78,7 +78,7 @@ export default function WeatherWeekly() {
           currentDataKey={currentDataKey}
         />
         <ResponsiveContainer className="!w-full !h-full mt-4">
-          <BarChart className={`h-[500px] !w-full p-0 ml-0 mt-8`} data={data}>
+          <BarChart className={`h-[500px] !w-full p-0 ml-0 mt-8`} data={data ? data : null}>
             <XAxis dataKey="date" tick={{ fill: "#FF2E63" }} />
             <Tooltip
               contentStyle={{

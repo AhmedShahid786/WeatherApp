@@ -26,9 +26,9 @@ const WeatherTomorrow = () => {
     <section className="flex flex-col items-center justify-center pr-4 pt-2 flex-wrap">
       <div className="flex w-full">
         <div className={`w-2/4 flex text-sub customFont`}>
-          <WeatherData currentWeather={tomorrowWeather} city={city} />
+          <WeatherData currentWeather={tomorrowWeather ? tomorrowWeather : null} city={city ? city : null} />
           <div className="w-2/4 pt-8 flex items-center justify-center">
-            <WeatherIcon src={tomorrowWeather.img} />
+            <WeatherIcon src={tomorrowWeather ? tomorrowWeather.img : null} />
           </div>
         </div>
 
@@ -36,7 +36,7 @@ const WeatherTomorrow = () => {
           className={`w-2/4 mt-4 h-full flex flex-wrap justify-around items-center border-2 px-4 rounded-lg
           ${theme === "dark" ? "border-thirdD" : "border-thirdL"}`}
         >
-          {additionalInfoIcons.map((icon, ind) => {
+          {additionalInfoIcons ? additionalInfoIcons.map((icon, ind) => {
             return (
               <AdditionalInfo
                 icon={icon.icon}
@@ -45,7 +45,7 @@ const WeatherTomorrow = () => {
                 key={ind}
               />
             );
-          })}
+          }) : null}
         </div>
       </div>
 
@@ -62,7 +62,7 @@ const WeatherTomorrow = () => {
           </p>
         </div>
         <div>
-          <WeatherHourly hourlyWeatherData={tomorrowHourlyWeather} />
+          <WeatherHourly hourlyWeatherData={tomorrowHourlyWeather ? tomorrowHourlyWeather : null} />
         </div>
       </div>
     </section>
