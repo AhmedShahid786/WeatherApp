@@ -43,11 +43,11 @@ export default function ProfileInfo({ userObj, successPopup, errorPopup, setUser
           size="small"
         />
       ) : (
-        <div className="w-2/4 flex flex-col justify-center items-center gap-8">
+        <div className="sm:w-2/4 w-full mx-4 flex flex-col justify-center items-center gap-8">
           <Avatar
             src={userObj?.profilePicUrl}
             size={{
-              xs: 24,
+              xs: 48,
               sm: 32,
               md: 40,
               lg: 64,
@@ -56,38 +56,44 @@ export default function ProfileInfo({ userObj, successPopup, errorPopup, setUser
             }}
             className="border-2 border-thirdD"
           />
-          <div className={`w-full flex border-2 border-thirdD p-2 rounded-lg`}>
+          <div
+            className={`w-full flex justify-center items-center border-2 border-thirdD p-2 rounded-lg`}
+          >
             <p
-              className={`w-1/2 text-center text-xl font-customFont text-fourthD opacity-95`}
+              className={`w-1/3 text-center sm:text-xl text-base font-customFont text-fourthD opacity-95`}
             >
               Username
             </p>
             <p
-              className={`w-1/2 text-center text-xl font-customFont text-fourthD`}
+              className={`w-2/3 text-center sm:text-xl text-base font-customFont text-fourthD`}
             >
               {userObj?.username}
             </p>
           </div>
-          <div className={`w-full flex border-2 border-thirdD p-2 rounded-lg`}>
+          <div
+            className={`w-full flex justify-center items-center border-2 border-thirdD p-2 rounded-lg`}
+          >
             <p
-              className={`w-1/2 text-center text-xl font-customFont text-fourthD opacity-95`}
+              className={`w-1/3 text-center sm:text-xl text-base font-customFont text-fourthD opacity-95`}
             >
               Email
             </p>
             <p
-              className={`w-1/2 text-center text-xl font-customFont text-fourthD`}
+              className={`w-2/3 text-center sm:text-xl text-base font-customFont text-fourthD`}
             >
               {userObj?.email}
             </p>
           </div>
-          <div className={`w-full flex border-2 border-thirdD p-2 rounded-lg`}>
+          <div
+            className={`w-full flex items-center justify-center border-2 border-thirdD p-2 rounded-lg`}
+          >
             <p
-              className={`w-1/2 text-center text-xl font-customFont text-fourthD opacity-95`}
+              className={`w-1/3 text-center sm:text-xl text-base font-customFont text-fourthD opacity-95`}
             >
               Saved-Cities
             </p>
             <p
-              className={`w-1/2 text-center text-xl font-customFont text-fourthD`}
+              className={`w-2/3 text-center sm:text-xl text-base font-customFont text-fourthD`}
             >
               {userObj?.savedCities.total}
             </p>

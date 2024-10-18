@@ -9,13 +9,13 @@ export default function RootLayout() {
 
   return (
     <div
-      className={`w-screen h-screen flex
+      className={`w-screen h-screen overflow-scroll flex max-sm:flex-col-reverse max-sm:items-center max-sm:justify-center
     ${theme === "light" ? "bg-firstL" : "bg-firstD"}`}
     >
-      <div className="max-w-max h-full z-30">
+      <div className="w-full sm:max-w-max h-full max-sm:h-[10dvh] max-sm:mb-4 z-30 flex items-center justify-center">
         <Menu />
       </div>
-      <Outlet/>
+      <Outlet />
     </div>
   );
 }

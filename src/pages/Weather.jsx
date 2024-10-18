@@ -49,12 +49,12 @@ const Weather = () => {
           <Spin indicator={<LoadingOutlined spin />} size="large" />
         </div>
       ) : (
-        <div className="h-screen max-w-[91dvw]">
+        <div className="h-screen sm:max-w-[91dvw] w-full">
           <div className="w-full py-6 px-4">
             <Header />
           </div>
 
-          <div className="w-full pl-4">
+          <div className="w-full sm:pl-4 px-2">
             <WeatherTabs />
           </div>
         </div>

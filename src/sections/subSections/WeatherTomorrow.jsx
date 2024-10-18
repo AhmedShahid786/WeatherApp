@@ -23,29 +23,34 @@ const WeatherTomorrow = () => {
     tomorrowWeather.wind,
   ];
   return (
-    <section className="flex flex-col items-center justify-center pr-4 pt-2 flex-wrap">
-      <div className="flex w-full">
-        <div className={`w-2/4 flex text-sub customFont`}>
-          <WeatherData currentWeather={tomorrowWeather ? tomorrowWeather : null} city={city ? city : null} />
+    <section className="flex flex-col items-center justify-center sm:pr-4 sm:pt-2 max-sm:px-2 flex-wrap">
+      <div className="flex max-sm:flex-col max-sm:gap-8 w-full">
+        <div className={`w-2/4 max-sm:w-full flex text-sub customFont`}>
+          <WeatherData
+            currentWeather={tomorrowWeather ? tomorrowWeather : null}
+            city={city ? city : null}
+          />
           <div className="w-2/4 pt-8 flex items-center justify-center">
             <WeatherIcon src={tomorrowWeather ? tomorrowWeather.img : null} />
           </div>
         </div>
 
         <div
-          className={`w-2/4 mt-4 h-full flex flex-wrap justify-around items-center border-2 px-4 rounded-lg
+          className={`w-2/4 max-sm:w-full h-full flex flex-wrap justify-around items-center border-2 px-4 rounded-lg
           ${theme === "dark" ? "border-thirdD" : "border-thirdL"}`}
         >
-          {additionalInfoIcons ? additionalInfoIcons.map((icon, ind) => {
-            return (
-              <AdditionalInfo
-                icon={icon.icon}
-                label={icon.label}
-                value={AdditionalInfoVals[ind]}
-                key={ind}
-              />
-            );
-          }) : null}
+          {additionalInfoIcons
+            ? additionalInfoIcons.map((icon, ind) => {
+                return (
+                  <AdditionalInfo
+                    icon={icon.icon}
+                    label={icon.label}
+                    value={AdditionalInfoVals[ind]}
+                    key={ind}
+                  />
+                );
+              })
+            : null}
         </div>
       </div>
 
@@ -62,7 +67,11 @@ const WeatherTomorrow = () => {
           </p>
         </div>
         <div>
-          <WeatherHourly hourlyWeatherData={tomorrowHourlyWeather ? tomorrowHourlyWeather : null} />
+          <WeatherHourly
+            hourlyWeatherData={
+              tomorrowHourlyWeather ? tomorrowHourlyWeather : null
+            }
+          />
         </div>
       </div>
     </section>

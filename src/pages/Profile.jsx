@@ -25,7 +25,9 @@ function Profile () {
 
   //? Initialize states for form inputs
   const [email, setEmail] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
   const [username, setUsername] = useState("");
   const [profilePic, setProfilePic] = useState(null);
   const fileInputRef = useRef(null);
@@ -177,18 +179,18 @@ function Profile () {
   //? User's account signin logic
   const signIn = async () => {
     //* Show error if any input field is empty
-    if (!email || !password) {
+    if (!loginEmail || !loginPassword) {
       errorPopup("All fields are required");
     } else {
       //* Show loading icon untill all data is uploaded successfuly
       setLoading(true);
       try {
         //* Signin user with email and password
-        await signInWithEmailAndPassword(auth, email, password)
+        await signInWithEmailAndPassword(auth, loginEmail, loginPassword)
           .then((userCredential) => {
             setLoading(false);
-            setEmail("");
-            setPassword("");
+            setLoginEmail("");
+            setLoginPassword("");
             uid = userCredential.user.uid;
             console.log("user logged in =>", uid);
           })
@@ -213,7 +215,12 @@ function Profile () {
 
       {/* Only show ProfileInfo once user is logged in AND data is uploaded */}
       {isUser && isDataUploaded && !isDataUploading ? (
-        <ProfileInfo userObj={userDoc} successPopup={successPopup} errorPopup={errorPopup} setUser={setIsUser}/>
+        <ProfileInfo
+          userObj={userDoc}
+          successPopup={successPopup}
+          errorPopup={errorPopup}
+          setUser={setIsUser}
+        />
       ) : (
         // If user is not logged in then show login/signup form
         <>
@@ -221,7 +228,7 @@ function Profile () {
           <div className="w-3/6 border-b-2 border-thirdD flex items-center justify-center gap-2">
             <button
               onClick={() => setIsLoginOpen(!isLoginOpen)}
-              className={`w-2/6 p-2 font-customFont text-base border-2 border-thirdD rounded-t-lg border-b-0 text-white
+              className={`sm:w-2/6 w-3/6 p-2 font-customFont text-base border-2 border-thirdD rounded-t-lg border-b-0 text-white
           ${isLoginOpen ? "bg-thirdD" : ""}
           `}
             >
@@ -229,7 +236,7 @@ function Profile () {
             </button>
             <button
               onClick={() => setIsLoginOpen(!isLoginOpen)}
-              className={`w-2/6 p-2 font-customFont text-base border-2 border-thirdD rounded-t-lg border-b-0 text-white
+              className={`sm:w-2/6 w-3/6 p-2 font-customFont text-base border-2 border-thirdD rounded-t-lg border-b-0 text-white
           ${!isLoginOpen ? "bg-thirdD" : ""}`}
             >
               Login
@@ -262,6 +269,7 @@ function Profile () {
                   <Input
                     required={true}
                     value={password}
+                    maxLength={20}
                     onChange={(e) => setPassword(e.target.value)}
                     type="password"
                     className={`w-60 bg-transparent border-2 border-thirdD focus:border-thirdD focus:border-2 focus:outline-none rounded-md text-base text-fourthD font-customFont p-1 overflow-scroll`}
@@ -275,6 +283,7 @@ function Profile () {
                   <Input
                     required={true}
                     value={username}
+                    maxLength={15}
                     onChange={(e) => setUsername(e.target.value)}
                     type="text"
                     className={`w-60 bg-transparent border-2 border-thirdD focus:border-thirdD focus:border-2 focus:outline-none rounded-md text-base text-fourthD font-customFont p-1 overflow-scroll`}
@@ -335,8 +344,8 @@ function Profile () {
                   </Label>
                   <Input
                     required={true}
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={loginEmail}
+                    onChange={(e) => setLoginEmail(e.target.value)}
                     type="text"
                     className={`w-60 bg-transparent border-2 border-thirdD focus:border-thirdD focus:border-2 focus:outline-none rounded-md text-base text-fourthD font-customFont p-1 overflow-scroll`}
                   />
@@ -348,8 +357,8 @@ function Profile () {
                   </Label>
                   <Input
                     required={true}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={loginPassword}
+                    onChange={(e) => setLoginPassword(e.target.value)}
                     type="password"
                     className={`w-60 bg-transparent border-2 border-thirdD focus:border-thirdD focus:border-2 focus:outline-none rounded-md text-base text-fourthD font-customFont p-1 overflow-scroll`}
                   />

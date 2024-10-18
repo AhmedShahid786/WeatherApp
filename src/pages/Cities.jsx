@@ -21,7 +21,7 @@ import {
 } from "@headlessui/react";
 import { Link } from "react-router-dom";
 
-function City() {
+function Cities() {
   //? Import theme state from context
   const { theme } = useContext(themeContext);
 
@@ -143,9 +143,9 @@ function City() {
   return (
     <section className="h-screen w-screen flex">
       {/* Main Div */}
-      <div className="h-full w-full flex">
+      <div className="h-full w-full flex max-sm:relative">
         {/* Add Citites Div */}
-        <div className="w-1/2 h-full flex flex-col justify-evenly items-center  bg-black">
+        <div className="sm:w-1/2 w-full max-sm:z-10 max-sm:bg-transparent h-full flex flex-col justify-evenly items-center bg-black">
           {/* Header Div */}
           <div className="w-5/6 h-1/6 flex justify-between items-center">
             <p
@@ -277,7 +277,7 @@ function City() {
           )}
         </div>
         {/* Spline Div */}
-        <div className="w-1/2 h-full bg-black">
+        <div className="w-1/2 h-full max-sm:hidden">
           <Spline scene="https://prod.spline.design/B9gCGFUsdCoKNFqb/scene.splinecode" />
         </div>
       </div>
@@ -285,4 +285,4 @@ function City() {
   );
 }
 
-export default City;
+export default Cities;

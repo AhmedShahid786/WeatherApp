@@ -54,9 +54,9 @@ const Header = () => {
   }
 
   return (
-    <section className="flex justify-between items-center ">
+    <section className="flex justify-around sm:justify-between items-center">
       <div
-        className={`w-4/5 flex bg-transparent !font-customFont hover:bg-transparent active:bg-transparent 
+        className={`sm:w-4/5 w-4/6 flex bg-transparent !font-customFont hover:bg-transparent active:bg-transparent 
         focus:border-thirdD focus:border-2 focus:outline-none rounded-lg text-xl placeholder:text-sub 
         py-2 border-2 placeholder:text-fourthD font-customFont
           ${
@@ -65,7 +65,7 @@ const Header = () => {
               : "border-thirdL text-fourthL"
           } pl-4 gap-2`}
       >
-        <SearchOutlined/>
+        <SearchOutlined />
         <input
           type="text"
           placeholder="Search Cities"

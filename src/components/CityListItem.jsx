@@ -16,7 +16,7 @@ export const CityListItem = ({city, handleCityDelete}) => {
 
   return (
     <div
-      className={`w-5/6 px-2 py-3 my-2 rounded-lg border-2 ${
+      className={`sm:w-5/6 w-full px-2 py-3 my-2 rounded-lg border-2 ${
         theme === "dark" ? "border-thirdD" : "border-thirdL"
       }`}
     >
@@ -27,7 +27,7 @@ export const CityListItem = ({city, handleCityDelete}) => {
         {city ? city[0].toUpperCase() + city.slice(1) : ""}
       </div>
 
-      <div className="w-full flex justify-end items-center gap-2">
+      <div className="w-full max-sm:mt-2 flex justify-end items-center gap-2">
         <button
         onClick={() => handleCityDelete(city)}
           className={`border-2 px-2 text-base py-1 rounded-lg ${

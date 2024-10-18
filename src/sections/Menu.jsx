@@ -46,10 +46,10 @@ const Menu = () => {
 
   return (
     <div
-      className={`h-full w-[9dvw] flex flex-col items-center justify-start bg-transparent border-r-2
+      className={`h-full w-[9dvw] max-sm:w-full max-sm:pt-2 max-sm:px-2 flex sm:flex-col items-center justify-start bg-transparent sm:border-r-2 max-sm:border-t-2
         ${theme === "dark" ? "border-thirdD" : "border-thirdL"}`}
     >
-      <div className="w-full h-1/6 flex items-center justify-center">
+      <div className="w-full max-sm:hidden h-1/6 flex items-center justify-center">
         <img
           src={thunderRain}
           alt=""
@@ -57,21 +57,21 @@ const Menu = () => {
         />
       </div>
 
-      <div className="w-full h-4/6 flex flex-col items-center justify-center gap-6 my-auto">
+      <div className="w-full h-4/6 flex sm:flex-col items-center justify-center max-sm:justify-around sm:gap-6 my-auto">
         {items.map((item) => (
           <Link
             to={item.path}
             key={item.key}
-            className={`w-4/6 flex flex-col items-center justify-center
+            className={`sm:w-4/6 max-sm:w-1/5 flex flex-col items-center justify-center
               ${
                 location.pathname === item.path
-                  ? "border-2 border-thirdD rounded-lg py-2"
+                  ? "border-2 border-thirdD rounded-lg sm:py-2 max-sm:px-3"
                   : ""
               }`}
           >
             <img src={item.icon} alt="" className="w-8 h-8" />
             <p
-              className={`font-customFont leading-none text-xs
+              className={`font-customFont leading-none text-xs max-sm:text-base
           ${theme === "dark" ? "text-fourthD" : "text-fourthL"}`}
             >
               {item.label}
